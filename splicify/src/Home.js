@@ -13,8 +13,13 @@ class Home extends React.Component {
       <div className="Home">
         <header className="Home-header">
           <Introduction text="Welcome to Splicify" 
-            text2="Welcome to Splicify, this is an interactive experience that can visualize your top played songs."
-            text3="B:"/>
+            text2="Splicify is an interactive experience that can visualize your top played songs. The form of art that we hope to produce is a collage of album covers from the songs that are listened to the most by a particular user
+            While we are creating a form of internet art, the purpose of the final product is to also serve as a form of data visualization on a web browserInspiration came from an NFT by Time, they took different magazine pages and put them together. Each person would have a different Time slice so that every cover created was different."
+            text3="While we are creating a form of internet art, the purpose of the final product is to also serve as a form of data visualization on a web browser."
+            text4="Inspiration came from an NFT by Time, they took different magazine pages and put them together. Each person would have a different Time slice so that every cover created was different."
+            step1="Step 1: Log into your account."
+            step2="Step 2: Share your created quiz link with your friends."
+            step3="Step 3: Compete with your friends to guess the top 5 songs in your album list."/>
         </header>
         
         
