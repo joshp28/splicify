@@ -8,3 +8,28 @@
     background-size: cover; */
 
 }
+
+.Home-logo {
+    /* max-width: 50%; */
+    /* max-height: 50%; */
+    /* width: 50%; */
+    height: 150px;
+}
+
+
+h1 {
+    font-weight: bold;
+    color: #5C49DD;
+    font-size: 80px;
+}
+
+h1 {
+    font-size: 70px;
+}
+
+.btn {
+    /* max-width: 50%; */
+    /* max-height: 50%; */
+    /* width: 50%; */
+    height: 50px;
+}

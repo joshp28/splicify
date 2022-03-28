@@ -2,7 +2,7 @@
 
 .Home {
   text-align: center;
-  color: black;
+  color: yellow;
   font-family: Helvetica;
   
 }
@@ -14,7 +14,7 @@
 
 
 .Home-header {
-  background-image: url("AuraSample.png");
+  background-image: url("welcome_page.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
