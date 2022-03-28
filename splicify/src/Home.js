@@ -14,9 +14,9 @@ class Home extends React.Component {
         <header className="Home-header">
           <Introduction 
             welcome="Welcome to"
-            text="Splicify" 
-            text3="Your top 5 albums will be spliced onto this cube."
-            text4="Try to guess your top albums and see if your friends can guess them right!"
+            title="Splicify" 
+            intro1="Your top 5 albums will be spliced onto this cube."
+            intro2="Try to guess your top albums and see if your friends can guess them right!"
             />
         </header>
         
