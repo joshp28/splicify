@@ -1,31 +1,25 @@
 import './App.css';
 import React from 'react';
-import Home from './Home';
+import Home from './components/Home/Home';
+//import Guesser from './components/Guesser/Guesser';
+import Introduction from './components/Introduction/Introduction';
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
-class App extends React.Component {
+function App() {
   
-  render() {
-    return (
-      <div className="App">        
-        <Home></Home>
-      </div>
-      
-    );
-  }
+  return (
+    
+
+    <Router>
+      <Routes>
+        <Route path="/" exact element={<Introduction/>} />
+      </Routes>
+    </Router>
+
+    
+  )
+
 }
 
-
-
-// function App() {
-  // return (
-  //   <div className="App">
-  //     <header className="App-header">
-  //       <img src={logo} className="App-logo" alt="logo" />
-        
-  //     </header>
-  //   </div>
-    
-  // );
-// }
 
 export default App;

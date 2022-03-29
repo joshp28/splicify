@@ -2,14 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Guesser.module.css';
 
-const Guesser = () => (
-  <div className={styles.Guesser}>
-    Guesser Component
-  </div>
-);
+function Guesser() {
 
-Guesser.propTypes = {};
 
-Guesser.defaultProps = {};
+  return (
+    <div className="Guesser">
+      hello this is the guesser
+
+    </div>
+
+  );
+}
+
+
+
 
 export default Guesser;
