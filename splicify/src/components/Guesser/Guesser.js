@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './Guesser.module.css';
+import './Guesser.css';
 
 function Guesser() {
 
 
-  return (
-    <div className="Guesser">
-      hello this is the guesser
+  return (  
+    <div className="Home-header" >
+    <h1>{"Splicify"}</h1>
+
+    <h2>Guess your 01 album</h2>
+    
+    <input type="text" name="name" />
+    <input type="submit" value="->" />
 
     </div>
 

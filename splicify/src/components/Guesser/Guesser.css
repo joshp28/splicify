@@ -1,0 +1,36 @@
+
+
+.Home {
+    text-align: center;
+    color: yellow;
+    font-family: Helvetica;
+    
+  }
+ 
+
+.Home-header {
+    background-image: url("../../images/welcome_page.png");
+    background-position: 'center';
+    background-size: 'cover';
+    background-repeat: 'no-repeat';
+    width: '100vw';
+    height: '100vh';
+    text-align: center;
+    color: yellow;
+    font-family: Helvetica; 
+}
+
+h1 {
+    padding-top: 10vh;
+    font-weight: bold;
+    color: #5C49DD;
+    font-size: 70px;
+}
+
+h2 {
+    padding-top: 10vh;
+    font-weight: bold;
+    color: yellow;
+    font-size: 40px;
+}
+
