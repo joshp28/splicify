@@ -1,0 +1,53 @@
+.Home {
+    text-align: center;
+    color: yellow;
+    font-family: Helvetica;
+    
+  }
+ 
+
+  .Home-header {
+    background-image: url("../../images/welcome_page.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    color: yellow;
+    font-family: Helvetica; 
+  }
+
+.Header {
+    /* color: white;
+    text-align: left;
+    font-family: Helvetica; */
+    /* background-image: url("AuraSample.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; */
+
+}
+
+.Home-logo {
+    /* max-width: 50%; */
+    /* max-height: 50%; */
+    /* width: 50%; */
+    height: 150px;
+}
+
+
+h1 {
+    font-weight: bold;
+    color: #5C49DD;
+    font-size: 80px;
+}
+
+h1 {
+    font-size: 70px;
+}
+
+.btn {
+    /* max-width: 50%; */
+    /* max-height: 50%; */
+    /* width: 50%; */
+    /* height: 50px; */
+} 
