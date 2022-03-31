@@ -1,6 +1,7 @@
 import './Introduction.css';
 import spliced from '../../images/Cube.png';
 import btn from '../../images/Enter_btn.png';
+import circle from '../../images/loading_circle.png';
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -24,6 +25,7 @@ function Introduction() {
 
 
     const [showIntro, setShowIntro] = useState(true);
+    // const [showLoading, setShowLoading] = useState(true);
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -63,6 +65,19 @@ function Introduction() {
 
                 }   
                 <img src={btn} className="btn"  onClick={() => setShowIntro(!showIntro)} />
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
+
+                <img src={circle} className="circle" />
+                <br/>
+                <br/>
+                <br/>
+
+                {/* <img class="image" src="" alt="" width="120" height="120"></img>  */}
 
                 
                 
