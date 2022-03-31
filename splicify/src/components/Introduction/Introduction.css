@@ -28,3 +28,8 @@ h1 {
     bottom: 10%;
     cursor: pointer;
 } 
+
+#modal-modal-title {
+    /* text-align: center; */
+    color: black
+}
