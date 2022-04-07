@@ -28,15 +28,33 @@ function Introduction() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    
+
+    // const [play, setPlay] = React.useState(false);
+    const handlePlay = () => setPlay(true);
+    
+    var audio = new Audio("https://p.scdn.co/mp3-preview/8553a21392d68592e6884a15f28909a499663b1c?cid=1065d1fc90714ae18996972cb4abd133");
+    function setPlay(){
+        setTimeout(function(){
+            audio.play();
+        
+            setTimeout(function(){
+                audio.pause();
+                audio.currentTime = 0;
+            }, 5000);
+        }, 500);
+    }
+    
+
     return (
         <div>
             <header className="Home">
                 <Button onClick={handleOpen}>Share</Button>
                 <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
                 >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -65,6 +83,10 @@ function Introduction() {
                 <img src={btn} className="btn"  onClick={() => setShowIntro(!showIntro)} />
 
                 
+                <Button onClick={handlePlay}>HINT</Button>
+                
+
+                
                 
             </header>
 
@@ -77,5 +99,7 @@ function Introduction() {
 
     )
 }
+
+
 
 export default Introduction;
