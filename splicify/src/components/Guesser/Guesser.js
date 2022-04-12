@@ -3,11 +3,35 @@ import PropTypes from 'prop-types';
 import './Guesser.css';
 import cover from '../../images/boypablo-feelinglonely.jpg';
 
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import parse from 'autosuggest-highlight/parse';
+import match from 'autosuggest-highlight/match';
+import Box from '@mui/material/Box';
+
+
+const top100Films = [
+  { title: 'The Shawshank Redemption', year: 1994 },
+  { title: 'The Godfather', year: 1972 },
+  { title: 'The Godfather: Part II', year: 1974 },
+  { title: 'The Dark Knight', year: 2008 },
+  { title: '12 Angry Men', year: 1957 },
+  { title: "Schindler's List", year: 1993 },
+  { title: 'Pulp Fiction', year: 1994 },
+  {
+  title: 'The Lord of the Rings: The Return of the King',
+  year: 2003,
+  }
+];
 
 class Guesser extends Component {
+  
 
   componentDidMount() {
     this.cropImg();
+    // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
+    
+    
   }
 
   state = {
@@ -107,6 +131,7 @@ class Guesser extends Component {
     }
   }
 
+  
 
   render() {
     return (
@@ -115,8 +140,56 @@ class Guesser extends Component {
         <canvas className="canvas" ref='canvas' id="canvas" width={500} height={500}></canvas>
         <div className="textbox">
           <h2>Guess your {this.state.albumNum + 1} album</h2>
+          
+          
           <div className='textbox'>
-            <input autoComplete="off" type="text" id="input" onChange={this.saveInput} />
+          <Autocomplete
+            id="highlights-demo"
+            sx={{ width: 300 }}
+            options={top100Films}
+            getOptionLabel={(option) => option.title}
+            renderInput={(params) => (
+              <Box
+                sx={{
+                  width: 500,
+                  transform: 'translate(210%, 0%)',
+                  maxWidth: '100%',
+                }}
+              >
+                {/* <TextField fullWidth label="fullWidth" id="fullWidth" /> */}
+                <TextField {...params} sx={{ position: "center", background: "white", input: { color: 'black' } }} id="input" label="Guess your song!" margin="normal" onChange={this.saveInput}/>
+              </Box>
+              
+              // <input autoComplete="off" type="text" id="input" onChange={this.saveInput} />,
+              // <button onClick={() => { this.addNewItem(); document.getElementById('input').value = ''; }}> Submit </button>,
+              // <TextField {...params} id="GUESS" label="Guess your song!" margin="normal" />
+              // <TextField {...params} sx={{ position: "center", background: "white", input: { color: 'black' } }} id="input" label="Guess your song!" margin="normal" onChange={this.saveInput}/>
+
+              
+            )}
+            renderOption={(props, option, { inputValue }) => {
+                const matches = match(option.title, inputValue);
+                const parts = parse(option.title, matches);
+
+                return (                
+                <li {...props}>
+                    <div>
+                    {parts.map((part, index) => (
+                        <span
+                        key={index}
+                        style={{
+                            fontWeight: part.highlight ? 700 : 400,
+                        }}
+                        >
+                        {part.text}
+                        </span>
+                    ))}
+                    </div>
+                </li>
+                );
+            }}
+        />
+            {/* <input autoComplete="off" type="text" id="input" onChange={this.saveInput} /> */}
             <button onClick={() => { this.addNewItem(); document.getElementById('input').value = ''; }}> Submit </button>
           </div>
         </div>

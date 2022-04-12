@@ -7,10 +7,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import parse from 'autosuggest-highlight/parse';
-import match from 'autosuggest-highlight/match';
 
 const style = {
     position: 'relative',
@@ -33,20 +29,7 @@ function Introduction() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-    const top100Films = [
-        { title: 'The Shawshank Redemption', year: 1994 },
-        { title: 'The Godfather', year: 1972 },
-        { title: 'The Godfather: Part II', year: 1974 },
-        { title: 'The Dark Knight', year: 2008 },
-        { title: '12 Angry Men', year: 1957 },
-        { title: "Schindler's List", year: 1993 },
-        { title: 'Pulp Fiction', year: 1994 },
-        {
-        title: 'The Lord of the Rings: The Return of the King',
-        year: 2003,
-        }
-    ];
+    
 
     return (
         <div>
@@ -65,37 +48,7 @@ function Introduction() {
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                     Lorem ipsum...
                     </Typography>
-
-                    <Autocomplete
-                        id="highlights-demo"
-                        sx={{ width: 300 }}
-                        options={top100Films}
-                        getOptionLabel={(option) => option.title}
-                        renderInput={(params) => (
-                            <TextField {...params} label="Guess your song!" margin="normal" />
-                        )}
-                        renderOption={(props, option, { inputValue }) => {
-                            const matches = match(option.title, inputValue);
-                            const parts = parse(option.title, matches);
-
-                            return (
-                            <li {...props}>
-                                <div>
-                                {parts.map((part, index) => (
-                                    <span
-                                    key={index}
-                                    style={{
-                                        fontWeight: part.highlight ? 700 : 400,
-                                    }}
-                                    >
-                                    {part.text}
-                                    </span>
-                                ))}
-                                </div>
-                            </li>
-                            );
-                        }}
-                    />
+                    
                 </Box>
                 </Modal>
                 
