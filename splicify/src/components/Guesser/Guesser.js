@@ -9,7 +9,10 @@ import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 import Box from '@mui/material/Box';
 
+import Button from '@mui/material/Button';
 
+// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
+// We can replace with answers
 const top100Films = [
   { title: 'The Shawshank Redemption', year: 1994 },
   { title: 'The Godfather', year: 1972 },
@@ -18,20 +21,27 @@ const top100Films = [
   { title: '12 Angry Men', year: 1957 },
   { title: "Schindler's List", year: 1993 },
   { title: 'Pulp Fiction', year: 1994 },
-  {
-  title: 'The Lord of the Rings: The Return of the King',
-  year: 2003,
-  }
+  { title: 'The Lord of the Rings: The Return of the King', year: 2003}
 ];
+
+const handlePlay = () => setPlay(true);
+    
+var audio = new Audio("https://p.scdn.co/mp3-preview/8553a21392d68592e6884a15f28909a499663b1c?cid=1065d1fc90714ae18996972cb4abd133");
+function setPlay(){
+    audio.pause();
+    audio.currentTime = 0;
+    audio.play();
+    setTimeout(function() {
+        audio.pause();
+        audio.currentTime = 0;
+    }, 5000);
+}
 
 class Guesser extends Component {
   
 
   componentDidMount() {
     this.cropImg();
-    // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-    
-    
   }
 
   state = {
@@ -143,6 +153,8 @@ class Guesser extends Component {
           
           
           <div className='textbox'>
+          <Button onClick={handlePlay}>HINT</Button>
+
           <Autocomplete
             id="highlights-demo"
             sx={{ width: 600, margin: 'auto'}}
@@ -160,12 +172,6 @@ class Guesser extends Component {
                   <TextField {...params} sx={{ position: "center", background: "white", input: { color: 'black' } }} id="input" label="Guess your song!" margin="normal" onChange={this.saveInput}/>
                 </Box>
               </div>
-              
-              // <input autoComplete="off" type="text" id="input" onChange={this.saveInput} />,
-              // <button onClick={() => { this.addNewItem(); document.getElementById('input').value = ''; }}> Submit </button>,
-              // <TextField {...params} id="GUESS" label="Guess your song!" margin="normal" />
-              // <TextField {...params} sx={{ position: "center", background: "white", input: { color: 'black' } }} id="input" label="Guess your song!" margin="normal" onChange={this.saveInput}/>
-
               
             )}
             renderOption={(props, option, { inputValue }) => {
@@ -192,6 +198,8 @@ class Guesser extends Component {
         />
             {/* <input autoComplete="off" type="text" id="input" onChange={this.saveInput} /> */}
             <button onClick={() => { this.addNewItem(); document.getElementById('input').value = ''; }}> Submit </button>
+            <br/>
+            <br/>
           </div>
         </div>
 
