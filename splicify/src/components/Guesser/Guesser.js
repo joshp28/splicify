@@ -145,20 +145,21 @@ class Guesser extends Component {
           <div className='textbox'>
           <Autocomplete
             id="highlights-demo"
-            sx={{ width: 300 }}
+            sx={{ width: 600, margin: 'auto'}}
             options={top100Films}
             getOptionLabel={(option) => option.title}
             renderInput={(params) => (
-              <Box
-                sx={{
-                  width: 500,
-                  transform: 'translate(210%, 0%)',
-                  maxWidth: '100%',
-                }}
-              >
-                {/* <TextField fullWidth label="fullWidth" id="fullWidth" /> */}
-                <TextField {...params} sx={{ position: "center", background: "white", input: { color: 'black' } }} id="input" label="Guess your song!" margin="normal" onChange={this.saveInput}/>
-              </Box>
+              <div id="container">
+                <Box
+                  sx={{
+                    width: '60%',
+                    margin: 'auto'
+                  }}
+                >
+                
+                  <TextField {...params} sx={{ position: "center", background: "white", input: { color: 'black' } }} id="input" label="Guess your song!" margin="normal" onChange={this.saveInput}/>
+                </Box>
+              </div>
               
               // <input autoComplete="off" type="text" id="input" onChange={this.saveInput} />,
               // <button onClick={() => { this.addNewItem(); document.getElementById('input').value = ''; }}> Submit </button>,
