@@ -9,7 +9,11 @@ import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 import Box from '@mui/material/Box';
 
+
+
 import Button from '@mui/material/Button';
+
+import loaded from "../../spotify_info.json";
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 // We can replace with answers
@@ -37,12 +41,15 @@ function setPlay(){
     }, 5000);
 }
 
-class Guesser extends Component {
-  
 
+
+class Guesser extends Component {
   componentDidMount() {
     this.cropImg();
-  }
+    var data = loaded;
+    var mydata = JSON.parse(data);
+    console.log(mydata.songs[0].song_artist);
+  } 
 
   state = {
     tries: 0,
@@ -144,13 +151,13 @@ class Guesser extends Component {
   
 
   render() {
+    
     return (
       <div className="Home-header" >
         <h1>{"Splicify"}</h1>
         <canvas className="canvas" ref='canvas' id="canvas" width={500} height={500}></canvas>
         <div className="textbox">
-          <h2>Guess your {this.state.albumNum + 1} album</h2>
-          
+          <h2>Guess your {this.state.albumNum + 1} album</h2>          
           
           <div className='textbox'>
           <Button onClick={handlePlay}>HINT</Button>
