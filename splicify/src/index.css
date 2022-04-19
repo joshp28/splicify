@@ -10,7 +10,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-image: url("./images/welcome_page.png");
+  background-color: #FFF7EF;
   background-position: 'center';
   background-size: 'cover';
   background-repeat: 'no-repeat';

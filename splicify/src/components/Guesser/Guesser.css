@@ -1,6 +1,6 @@
 .Home {
     text-align: center;
-    color: yellow;
+    /* color: yellow; */
     font-family: Helvetica;
 
 }
@@ -8,18 +8,24 @@
 
 h1 {
     font-weight: bold;
-    color: #5C49DD;
-    font-size: 70px;
-    text-align: center;
+    color: black;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 6em;
+    text-align: left;
+    font-weight: 300;
+    margin-left: 5vw;
+    margin-top: 5vh;
+    margin-bottom: 1vh;
 }
 
 h2 {
     /* bottom: 5px; */
     font-weight: bold;
-    color: yellow;
-    font-size: 40px;
-    text-align: center;
+    color: black;
+    font-size: 20px;
+    text-align: left;
     position: relative;
+    margin-left: 5vw;
 }
 
 .textbox {
@@ -28,6 +34,16 @@ h2 {
     color: yellow;
     font-size: 40px;
     text-align: center;
+
+    width: 300;
+    height: 40;
+    background-color: '#fff';
+    /* padd: 10;
+    paddingHorizontal: 15; */
+    border-color: '#ccc';
+    border-width: 1;
+    border-radius: 15;
+    font-size: 16;
 }
 
 .center {
@@ -44,4 +60,62 @@ canvas {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.block {
+    /* height: 5px; */
+    /* width: 391px; */
+    display: grid;
+    /* grid-template-columns: 1fr 20px 1fr;
+    grid-template-rows: 1fr;
+    background-color: rgb(255, 255, 255); */
+}
+
+hr {
+    margin: 20px;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.vl {
+    border-right: 2px solid black;
+    height: 90vh;
+    position: absolute;
+    right: 10vw;
+}
+
+.horizontalline2 {
+    margin-top: 15vh;
+    margin-bottom: 1vh;
+}
+
+.didnotgetit {
+    margin-top: 1vh;
+    margin-bottom: 0vh;
+    font-size: 4em;
+    font-weight: bold;
+    font-weight: 300;
+    color: black;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+.congrats {
+    margin-top: 1vh;
+    margin-bottom: 0vh;
+    font-size: 4em;
+    font-weight: bold;
+    font-weight: 300;
+    color: black;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+.scoreheader {
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    position: absolute;
+    text-align: right;
+    top: 3vh;
+    right: 15vw;
+
+    font-size: 2.5em;
 }
