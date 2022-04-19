@@ -77,25 +77,34 @@ def get_current_track(access_token):
             artist_names += '; '
         # artist_names -= ', '
         # response += '{\nsong title: ' + i['name'] + '\nsong artist: ' + i['artists'][0]['name'] + '\nimage url: ' + i['album']['images'][0]['url'] + '\n}\n'
-        response += "{ song title: " + i['name'] + " song artist: " + artist_names + " image url: " + i['album']['images'][0]['url'] + "\n"
+        response += "{ song_title: " + i['name'] + " song_artist: " + artist_names + " image_url: " + i['album']['images'][0]['url'] + " "
         if i['preview_url'] != None:
             response += 'preview_url: ' + i['preview_url']
         else:
             response += '}'
         current_song = {
-            'song title': i['name'],
-            'song artist': artist_names,
-            'album name': i['album']['name'],
-            'image url': i['album']['images'][0]['url'],
-            'preview url': i['preview_url']
+            'song_title': i['name'],
+            'song_artist': artist_names,
+            'album_name': i['album']['name'],
+            'image_url': i['album']['images'][0]['url'],
+            'preview_url': i['preview_url']
 
         }
+        
         songs.append(current_song)
         # with open("spotify_info.txt", "a") as out_file:
         #     out_file.write(json.dumps(current_song))
             # pprint(current_song, out_file)
         print(response.encode("UTF-8"))
         print("\n")
+
+    spotipy_data = {
+        'songs': songs
+    }
+
+    json_string = json.dumps(spotipy_data)
+    with open('./src/spotify_info.json', 'w') as out:
+        json.dump(json_string, out)
 
     # track_id = json_resp['item']['id']
     # track_name = json_resp['item']['name']
