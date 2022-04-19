@@ -143,8 +143,8 @@ class Guesser extends Component {
           </div>
         </div>
         <hr className="horizontalline2"/>
-        <div className='didnotgetit'>SORR YOU DIDN'T GET IT ...</div>
-        <div className='congrats'>CONGRATS! YOU GOT IT ...</div>
+        <div className='didnotgetit'>SORRY YOU DIDN'T GET IT ...</div>
+        {/* <div className='congrats'>CONGRATS! YOU GOT IT ...</div> */}
 
       </div>
     );
