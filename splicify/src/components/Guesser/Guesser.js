@@ -5,6 +5,8 @@ import cover from '../../images/boypablo-feelinglonely.jpg';
 
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import { Controller, useForm } from "react-hook-form";
+
 import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 import Box from '@mui/material/Box';
@@ -14,6 +16,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
 import loaded from "../../spotify_info.json";
+
+
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 // We can replace with answers
@@ -102,12 +106,13 @@ class Guesser extends Component {
     // guess it right
     if (input != null && input.toLowerCase() === mydata.songs[albumNum].song_title.toLowerCase()) {
       answers.push("True"); 
+      console.log(answers);
       this.setState({ albumNum: this.state.albumNum + 1, tries: 0 });
 
     }
     // guess it wrong
     else if (tries == 2) {
-      answers.push("False");
+      console.log(answers);
       this.setState({ albumNum: this.state.albumNum + 1, tries: 0 });
     }
     // guess wrong but have more submissions
@@ -184,9 +189,12 @@ class Guesser extends Component {
 
           <Autocomplete
             id="highlights-demo"
+            freeSolo
+            autoSelect
             sx={{ width: 600, margin: 'auto'}}
             options={top100Films}
-            getOptionLabel={(option) => option.title}
+            // options={["option1", "option2", "another option"]}
+            // getOptionLabel={(option) => option.title}
             renderInput={(params) => (
               <div id="container">
                 <Box
