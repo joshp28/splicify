@@ -95,9 +95,12 @@ class Guesser extends Component {
   addNewItem = () => {
     let { answers, input, loaded, albumNum, tries} = this.state;
 
+    var data = loaded;
+    var mydata = JSON.parse(data);
+
     // guess three times and activate hints on each wrong submission
     // guess it right
-    if (input != null && input.toLowerCase() === loaded[albumNum].song_title.toLowerCase()) {
+    if (input != null && input.toLowerCase() === mydata.songs[albumNum].song_title.toLowerCase()) {
       answers.push("True"); 
       this.setState({ albumNum: this.state.albumNum + 1, tries: 0 });
 
@@ -112,6 +115,10 @@ class Guesser extends Component {
       this.setState({ input: null, tries: tries + 1});
 
     }
+
+    console.log("SONGTITLE");
+    console.log(mydata.songs[albumNum].song_title);
+    console.log("SONGTITLE");
 
     //console.log(this.state);
 
@@ -129,12 +136,9 @@ class Guesser extends Component {
     const ctx = canvas.getContext('2d');
 
     var image1 = new Image();
-    console.log("IMGSRC");
-    console.log(mydata);
-    console.log(mydata.songs);
-    console.log();
+    // console.log("IMGSRC");
     image1.src = mydata.songs[0].image_url;
-    console.log("IMGSRC");
+    // console.log("IMGSRC");
     image1.onload = function () {
       ctx.drawImage(image1, (image1.width / 2) - 50, 0, 100, 500, 0, 0, 100, 500);
     }
