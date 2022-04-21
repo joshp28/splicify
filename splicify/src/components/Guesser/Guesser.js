@@ -26,9 +26,13 @@ import loaded from "../../spotify_info.json";
 // var audio = new Audio("https://p.scdn.co/mp3-preview/8553a21392d68592e6884a15f28909a499663b1c?cid=1065d1fc90714ae18996972cb4abd133");
 var data = loaded;
 var mydata = JSON.parse(data);
+var copyData = JSON.parse(data);
 
-console.log("TOP");
-const top100Songs = mydata.songs;
+// console.log("TOP");
+// const top100Songs = mydata.songs;
+const top100Songs = copyData.songs.sort( () => Math.random() - 0.5) ;
+// var mydata = JSON.parse(data);.sort( () => Math.random() - 0.5) );
+
 
 var autoInput = "";
 
