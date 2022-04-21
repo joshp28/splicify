@@ -19,18 +19,7 @@ import loaded from "../../spotify_info.json";
 
 
 
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-// We can replace with answers
-const top100Films = [
-  { title: 'The Shawshank Redemption', year: 1994 },
-  { title: 'The Godfather', year: 1972 },
-  { title: 'The Godfather: Part II', year: 1974 },
-  { title: 'The Dark Knight', year: 2008 },
-  { title: '12 Angry Men', year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-  { title: 'Pulp Fiction', year: 1994 },
-  { title: 'The Lord of the Rings: The Return of the King', year: 2003}
-];
+
 
 const handlePlay = () => setPlay(true);
     
@@ -46,6 +35,13 @@ function setPlay(){
 }
 
 
+var data = loaded;
+var mydata = JSON.parse(data);
+
+console.log("TOP");
+const top100Songs = mydata.songs;
+
+var autoInput = "";
 
 class Guesser extends Component {
   componentDidMount() {
@@ -94,36 +90,53 @@ class Guesser extends Component {
 
   saveInput = (e) => {
     this.setState({ input: e.target.value });
+    
   };
 
   addNewItem = () => {
     let { answers, input, loaded, albumNum, tries} = this.state;
 
-    var data = loaded;
-    var mydata = JSON.parse(data);
+    // var data = loaded;
+    // var mydata = JSON.parse(data);
 
     // guess three times and activate hints on each wrong submission
     // guess it right
+    // input = top100Songs[]
+    // console.log(top100Songs[albumNum]);
+    
     if (input != null && input.toLowerCase() === mydata.songs[albumNum].song_title.toLowerCase()) {
       answers.push("True"); 
-      console.log(answers);
+      // if (autoInput.length > 0) {
+      //   input = autoInput;
+      //   console.log("BLAH");
+      // }
+      
+      console.log(autoInput);
       this.setState({ albumNum: this.state.albumNum + 1, tries: 0 });
+      
+
+    }
+    else if (autoInput != null && autoInput.toLowerCase() === mydata.songs[albumNum].song_title.toLowerCase()) {
+      answers.push("True");       
+      console.log(autoInput);
+      this.setState({ albumNum: this.state.albumNum + 1, tries: 0 });
+      
 
     }
     // guess it wrong
     else if (tries == 2) {
-      console.log(answers);
+      console.log(autoInput);
       this.setState({ albumNum: this.state.albumNum + 1, tries: 0 });
     }
     // guess wrong but have more submissions
-    else{
+    else{      
       this.setState({ input: null, tries: tries + 1});
-
     }
 
-    console.log("SONGTITLE");
-    console.log(mydata.songs[albumNum].song_title);
-    console.log("SONGTITLE");
+    // console.log("SONGTITLE");
+    // console.log(mydata.songs[albumNum].song_title);
+    // console.log(autoInput);
+    // console.log("SONGTITLE");
 
     //console.log(this.state);
 
@@ -131,9 +144,8 @@ class Guesser extends Component {
 
 
   cropImg() {
-    let { loaded } = this.state;
-    var data = loaded;
-    var mydata = JSON.parse(data);
+    // let { loaded } = this.state;
+    
     
 
     
@@ -176,7 +188,22 @@ class Guesser extends Component {
   
 
   render() {
+
+    // We can replace with answers
+    // var top100Songs = [
+    //   { song_title: 'The Shawshank Redemption', year: 1994 },
+    //   { song_title: 'The Godfather', year: 1972 },
+    //   { song_title: 'The Godfather: Part II', year: 1974 },
+    //   { song_title: 'The Dark Knight', year: 2008 },
+    //   { song_title: '12 Angry Men', year: 1957 },
+    //   { song_title: "Schindler's List", year: 1993 },
+    //   { song_title: 'Pulp Fiction', year: 1994 },
+    //   { song_title: 'The Lord of the Rings: The Return of the King', year: 2003}
+    // ];
     
+    // console.log(top100Songs);
+    
+
     return (
       <div className="Home-header" >
         <h1>{"Splicify"}</h1>
@@ -192,7 +219,10 @@ class Guesser extends Component {
             freeSolo
             autoSelect
             sx={{ width: 600, margin: 'auto'}}
-            options={top100Films}
+            // options={top100Films}
+            options={ top100Songs.map((option) => option.song_title )}
+            // onChange={(event, value) => console.log(value)}
+            onChange={(event, v) =>  autoInput = v}
             // options={["option1", "option2", "another option"]}
             // getOptionLabel={(option) => option.title}
             renderInput={(params) => (
@@ -204,35 +234,38 @@ class Guesser extends Component {
                   }}
                 >
                 
-                  <TextField {...params} sx={{ position: "center", background: "white", input: { color: 'black' } }} id="input" label="Guess your song!" margin="normal" onChange={this.saveInput}/>
+                  <TextField id="inputSolution"  {...params} sx={{ position: "center", background: "white", input: { color: 'black' } }} label="Guess your song!" margin="normal" onChange={this.saveInput}/>
                 </Box>
               </div>
               
             )}
-            renderOption={(props, option, { inputValue }) => {
-                const matches = match(option.title, inputValue);
-                const parts = parse(option.title, matches);
+            // renderOption={(props, option, { inputValue }) => {
+            //     const matches = match(option.title, inputValue);
+            //     const parts = parse(option.title, matches);
 
-                return (                
-                <li {...props}>
-                    <div>
-                    {parts.map((part, index) => (
-                        <span
-                        key={index}
-                        style={{
-                            fontWeight: part.highlight ? 700 : 400,
-                        }}
-                        >
-                        {part.text}
-                        </span>
-                    ))}
-                    </div>
-                </li>
-                );
-            }}
+            //     return (                
+            //     <li {...props}>
+            //         <div>
+            //         {parts.map((part, index) => (
+            //             <span
+            //             key={index}
+            //             style={{
+            //                 fontWeight: part.highlight ? 700 : 400,
+            //             }}
+            //             >
+            //             {part.text}
+            //             </span>
+            //         ))}
+            //         </div>
+            //     </li>
+            //     );
+            // }}
         />
             {/* <input autoComplete="off" type="text" id="input" onChange={this.saveInput} /> */}
-            <button onClick={() => { this.addNewItem(); document.getElementById('input').value = ''; }}> Submit </button>
+            {/* <button onClick={() => { this.addNewItem(); document.getElementById('input').value = ''; }}> Submit </button> */}
+            <Button variant="contained" type="submit" onClick={() => { this.addNewItem(); }}>
+              Submit
+            </Button>
             <br/>
             <br/>
           </div>
