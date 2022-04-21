@@ -21,20 +21,9 @@ import loaded from "../../spotify_info.json";
 
 
 
-const handlePlay = () => setPlay(true);
+// const handlePlay = () => setPlay(true);
     
-var audio = new Audio("https://p.scdn.co/mp3-preview/8553a21392d68592e6884a15f28909a499663b1c?cid=1065d1fc90714ae18996972cb4abd133");
-function setPlay(){
-    audio.pause();
-    audio.currentTime = 0;
-    audio.play();
-    setTimeout(function() {
-        audio.pause();
-        audio.currentTime = 0;
-    }, 5000);
-}
-
-
+// var audio = new Audio("https://p.scdn.co/mp3-preview/8553a21392d68592e6884a15f28909a499663b1c?cid=1065d1fc90714ae18996972cb4abd133");
 var data = loaded;
 var mydata = JSON.parse(data);
 
@@ -42,6 +31,22 @@ console.log("TOP");
 const top100Songs = mydata.songs;
 
 var autoInput = "";
+
+// function setPlay(){
+//   console.log("HEREEEE");
+//   console.log(mydata[albumNum]);
+//   var audio = new Audio("https://p.scdn.co/mp3-preview/8553a21392d68592e6884a15f28909a499663b1c?cid=1065d1fc90714ae18996972cb4abd133");
+//   audio.pause();
+//   audio.currentTime = 0;
+//   audio.play();
+//   setTimeout(function() {
+//       audio.pause();
+//       audio.currentTime = 0;
+//   }, 5000);
+// }
+
+
+
 
 class Guesser extends Component {
   componentDidMount() {
@@ -57,6 +62,21 @@ class Guesser extends Component {
     albumNum: 0
   };
 
+  // handlePlay = () => setPlay(true);
+
+  setPlay(albumNum){
+    // console.log("HEREEEE");
+    // console.log(mydata.songs[albumNum].preview_url);
+    // var audio = new Audio("https://p.scdn.co/mp3-preview/8553a21392d68592e6884a15f28909a499663b1c?cid=1065d1fc90714ae18996972cb4abd133");
+    var audio = new Audio(mydata.songs[albumNum].preview_url);    
+    audio.pause();
+    audio.currentTime = 0;
+    audio.play();
+    setTimeout(function() {
+        audio.pause();
+        audio.currentTime = 0;
+    }, 5000);
+  }
   // state = {
   //   tries: 0,
   //   answers: [],
@@ -212,7 +232,9 @@ class Guesser extends Component {
           <h2>Guess your {this.state.albumNum + 1} album</h2>          
           
           <div className='textbox'>
-          <Button onClick={handlePlay}>HINT</Button>
+          {/* <Button onClick={handlePlay}>HINT</Button> */}
+          <Button onClick={() => { this.setPlay(this.state.albumNum) }}>HINT</Button>
+          {/* onClick={() => { this.addNewItem(); }} */}
 
           <Autocomplete
             id="highlights-demo"
