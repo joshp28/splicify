@@ -8,6 +8,11 @@ class Guesser extends Component {
 
   componentDidMount() {
     this.cropImg();
+    document.getElementById('failed').style.display = 'none'
+    document.getElementById('passed').style.display = 'none'
+    document.getElementById('guesser').style.display = ''
+    document.getElementById('next').style.display = 'none'
+    return;
   }
 
   state = {
@@ -44,6 +49,7 @@ class Guesser extends Component {
 
   saveInput = (e) => {
     this.setState({ input: e.target.value });
+    return;
   };
 
   addNewItem = () => {
@@ -53,14 +59,17 @@ class Guesser extends Component {
     // guess it right
     if (input != null && input.toLowerCase() === spotify[albumNum].song_title.toLowerCase()) {
       answers.push("Correct");
-      this.setState({ albumNum: this.state.albumNum + 1, tries: 0, correct: correct + 1 });
-
-
+      this.setState({ correct: correct + 1 });
+      document.getElementById('passed').style.display = '';
+      document.getElementById('guesser').style.display = 'none';
+      document.getElementById('next').style.display = '';
     }
     // guess it wrong
     else if (tries == 2) {
       answers.push("Incorrect");
-      this.setState({ albumNum: this.state.albumNum + 1, tries: 0 });
+      document.getElementById('failed').style.display = '';
+      document.getElementById('guesser').style.display = 'none';
+      document.getElementById('next').style.display = '';
     }
     // guess wrong but have more submissions
     else {
@@ -69,9 +78,21 @@ class Guesser extends Component {
     }
 
     //console.log(this.state);
-
+    return;
   };
 
+
+
+  nextAlbum = () => {
+
+    this.setState({ albumNum: this.state.albumNum + 1, tries: 0 });
+    document.getElementById('guesser').style.display = '';
+    document.getElementById('passed').style.display = 'none';
+    document.getElementById('failed').style.display = 'none';
+    document.getElementById('next').style.display = 'none'
+
+    return;
+  }
 
   roundedImage(ctx, x, y, width, height, radius) {
     ctx.beginPath();
@@ -128,23 +149,22 @@ class Guesser extends Component {
   render() {
     return (
       <div className="Home" >
-      <div class='vl'/>
+        <div className='vl' />
         <h1 className='scoreheader'>SCORE: {this.state.correct}/5</h1>
         <h1>{"SPLICIFY"}</h1>
-        <div class="block">
-          <hr />
-        </div>
-        <h2>DO YOU KNOW WHAT SONG SPLICE {this.state.albumNum + 1} IS?</h2>
-        <canvas className="canvas" ref='canvas' id="canvas" width={300} height={300}></canvas>
+        <hr className="block" />
         <div>
-          <div className='textbox'>
+          <h2>DO YOU KNOW WHAT SONG SPLICE {this.state.albumNum + 1} IS?</h2>
+          <canvas className="canvas" ref='canvas' id="canvas" width={300} height={300}></canvas>
+          <div className='textbox' id='guesser' >
             <input autoComplete="off" type="text" id="input" onChange={this.saveInput} />
             <button onClick={() => { this.addNewItem(); document.getElementById('input').value = ''; }}> Submit </button>
           </div>
+          <button onClick={() => { this.nextAlbum() }} id='next'> Next </button>
         </div>
-        <hr className="horizontalline2"/>
-        <div className='didnotgetit'>SORR YOU DIDN'T GET IT ...</div>
-        <div className='congrats'>CONGRATS! YOU GOT IT ...</div>
+        <hr className="horizontalline2" />
+        <div className='didnotgetit' id='failed' >SORRY YOU DIDN'T GET IT ...</div>
+        <div className='congrats' id='passed' >CONGRATS! YOU GOT IT ...</div>
 
       </div>
     );
