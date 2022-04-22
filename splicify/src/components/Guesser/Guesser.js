@@ -161,7 +161,6 @@ class Guesser extends Component {
           </div>
           <button onClick={() => { this.nextAlbum() }} id='next'> Next </button>
         </div>
-        <Results></Results>
         <hr className="horizontalline2" />
         <div className='didnotgetit' id='failed' >SORRY YOU DIDN'T GET IT ...</div>
         <div className='congrats' id='passed' >CONGRATS! YOU GOT IT ...</div>
