@@ -1,5 +1,4 @@
-import React, { Component, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import './Guesser.css';
 import cover from '../../images/boypablo-feelinglonely.jpg';
 
@@ -50,6 +49,7 @@ var autoInput = "";
 // }
 
 
+import Results from '../Results/Results.js';
 
 
 class Guesser extends Component {
@@ -64,6 +64,7 @@ class Guesser extends Component {
 
   state = {
     tries: 0,
+    results: false,
     correct: 0,
     answers: [],
     loaded,

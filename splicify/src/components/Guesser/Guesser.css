@@ -1,12 +1,12 @@
 .Home {
     text-align: center;
     font-family: Helvetica;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    overflow: hidden;
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    overflow:hidden;
 
 }
 
@@ -88,19 +88,19 @@ hr {
 
 .vl {
     border-right: 2px solid black;
-    height: 90vh;
+    height: 100vh;
     position: absolute;
     right: 10vw;
 }
 
 .horizontalline2 {
-    margin-top: 10vh;
-    margin-bottom: 1vh;
+    margin-top: 8vh;
+    /* margin-bottom: 2vh; */
 }
 
 .didnotgetit {
     margin-top: 1vh;
-    margin-bottom: 0vh;
+    margin-bottom: 2vh;
     font-size: 4em;
     font-weight: bold;
     font-weight: 300;
@@ -121,12 +121,11 @@ hr {
 .scoreheader {
     border: 1px solid black;
     border-radius: 20px;
-    padding: 20px;
+    padding: 2vh;
     position: absolute;
     text-align: right;
     top: 3vh;
     right: 15vw;
-
     font-size: 2.5em;
 }
 
