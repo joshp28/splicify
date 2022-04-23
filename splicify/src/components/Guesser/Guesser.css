@@ -51,6 +51,11 @@ h2 {
     font-size: 16;
 }
 
+.textbox {
+    /* bottom: 5px; */
+    position: center;
+}
+
 .center {
     display: block;
     margin-left: auto;
@@ -124,3 +129,5 @@ hr {
 
     font-size: 2.5em;
 }
+
+
