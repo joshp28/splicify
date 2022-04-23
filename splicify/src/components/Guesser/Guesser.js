@@ -1,5 +1,4 @@
-import React, { Component, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import './Guesser.css';
 import cover from '../../images/boypablo-feelinglonely.jpg';
 
@@ -50,17 +49,23 @@ var autoInput = "";
 // }
 
 
+import Results from '../Results/Results.js';
 
 
 class Guesser extends Component {
   componentDidMount() {
     this.cropImg();
-    
-    // console.log(mydata.songs[0].song_artist);
-  } 
+    document.getElementById('failed').style.display = 'none'
+    document.getElementById('passed').style.display = 'none'
+    document.getElementById('guesser').style.display = ''
+    document.getElementById('next').style.display = 'none'
+    return;
+  }
 
   state = {
     tries: 0,
+    results: false,
+    correct: 0,
     answers: [],
     loaded,
     albumNum: 0
@@ -114,47 +119,51 @@ class Guesser extends Component {
 
   saveInput = (e) => {
     this.setState({ input: e.target.value });
-    
+    return;
   };
 
   addNewItem = () => {
-    let { answers, input, loaded, albumNum, tries} = this.state;
-
-    // var data = loaded;
-    // var mydata = JSON.parse(data);
+    let { answers, input, loaded, albumNum, tries, correct } = this.state;
 
     // guess three times and activate hints on each wrong submission
     // guess it right
-    // input = top100Songs[]
-    // console.log(top100Songs[albumNum]);
-    
-    if (input != null && input.toLowerCase() === mydata.songs[albumNum].song_title.toLowerCase()) {
-      answers.push("True"); 
-      // if (autoInput.length > 0) {
-      //   input = autoInput;
-      //   console.log("BLAH");
-      // }
-      
-      console.log(autoInput);
-      this.setState({ albumNum: this.state.albumNum + 1, tries: 0 });
-      
-
+    if (input != null && input.toLowerCase() ===  mydata.songs[albumNum].song_title.toLowerCase()) {
+      answers.push("Correct");
+      console.log(input);
+      this.setState({ correct: correct + 1 });
+      document.getElementById('passed').style.display = '';
+      document.getElementById('guesser').style.display = 'none';
+      document.getElementById('next').style.display = '';
+      // console.log(spotify[albumNum].song_title);
     }
     else if (autoInput != null && autoInput.toLowerCase() === mydata.songs[albumNum].song_title.toLowerCase()) {
-      answers.push("True");       
-      console.log(autoInput);
-      this.setState({ albumNum: this.state.albumNum + 1, tries: 0 });
+      
+      // console.log(autoInput);
+      // console.log(spotify[albumNum].song_title);
+      // console.log(albumNum);
+      // this.setState({ albumNum: this.state.albumNum + 1, tries: 0 });
+      
+
+      answers.push("Correct");
+      this.setState({ correct: correct + 1 });
+      document.getElementById('passed').style.display = '';
+      document.getElementById('guesser').style.display = 'none';
+      document.getElementById('next').style.display = '';
+      
       
 
     }
     // guess it wrong
     else if (tries == 2) {
-      console.log(autoInput);
-      this.setState({ albumNum: this.state.albumNum + 1, tries: 0 });
+      answers.push("Incorrect");
+      document.getElementById('failed').style.display = '';
+      document.getElementById('guesser').style.display = 'none';
+      document.getElementById('next').style.display = '';
     }
     // guess wrong but have more submissions
-    else{      
-      this.setState({ input: null, tries: tries + 1});
+    else {
+      this.setState({ input: null, tries: tries + 1 });
+
     }
 
     // console.log("SONGTITLE");
@@ -163,9 +172,35 @@ class Guesser extends Component {
     // console.log("SONGTITLE");
 
     //console.log(this.state);
-
+    return;
   };
 
+
+
+  nextAlbum = () => {
+
+    this.setState({ albumNum: this.state.albumNum + 1, tries: 0 });
+    document.getElementById('guesser').style.display = '';
+    document.getElementById('passed').style.display = 'none';
+    document.getElementById('failed').style.display = 'none';
+    document.getElementById('next').style.display = 'none'
+
+    return;
+  }
+
+  roundedImage(ctx, x, y, width, height, radius) {
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + width - radius, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.lineTo(x + width, y + height - radius);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.lineTo(x + radius, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+  }
 
   cropImg() {
     // let { loaded } = this.state;
@@ -176,36 +211,37 @@ class Guesser extends Component {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
 
+
     var image1 = new Image();
     // console.log("IMGSRC");
     image1.src = mydata.songs[0].image_url;
     // console.log("IMGSRC");
     image1.onload = function () {
-      ctx.drawImage(image1, (image1.width / 2) - 50, 0, 100, 500, 0, 0, 100, 500);
+      ctx.drawImage(image1, (image1.width / 2) - 50, 0, 100, 500, 0, 0, 60, 300);
     }
 
     var image2 = new Image();
     image2.src = mydata.songs[1].image_url;
     image2.onload = function () {
-      ctx.drawImage(image2, (image2.width / 2) - 50, 0, 100, 500, 100, 0, 100, 500);
+      ctx.drawImage(image2, (image2.width / 2) - 50, 0, 100, 500, 60, 0, 60, 300);
     }
 
     var image3 = new Image();
     image3.src = mydata.songs[2].image_url;
     image3.onload = function () {
-      ctx.drawImage(image3, (image3.width / 2) - 50, 0, 100, 500, 200, 0, 100, 500);
+      ctx.drawImage(image3, (image3.width / 2) - 50, 0, 100, 500, 120, 0, 60, 300);
     }
 
     var image4 = new Image();
     image4.src = mydata.songs[3].image_url;
     image4.onload = function () {
-      ctx.drawImage(image4, (image4.width / 2) - 50, 0, 100, 500, 300, 0, 100, 500);
+      ctx.drawImage(image4, (image4.width / 2) - 50, 0, 100, 500, 180, 0, 60, 300);
     }
 
     var image5 = new Image();
     image5.src = mydata.songs[4].image_url;
     image5.onload = function () {
-      ctx.drawImage(image5, (image5.width / 2) - 50, 0, 100, 500, 400, 0, 100, 500);
+      ctx.drawImage(image5, (image5.width / 2) - 50, 0, 100, 500, 240, 0, 60, 300);
     }
   }
 
@@ -229,74 +265,56 @@ class Guesser extends Component {
     
 
     return (
-      <div className="Home-header" >
-        <h1>{"Splicify"}</h1>
-        <canvas className="canvas" ref='canvas' id="canvas" width={500} height={500}></canvas>
-        <div className="textbox">
-          <h2>Guess your {this.state.albumNum + 1} album</h2>          
-          
-          <div className='textbox'>
-          {/* <Button onClick={handlePlay}>HINT</Button> */}
-          <Button onClick={() => { this.setPlay(this.state.albumNum) }}>HINT</Button>
-          {/* onClick={() => { this.addNewItem(); }} */}
-
-          <Autocomplete
-            id="highlights-demo"
-            freeSolo
-            autoSelect
-            sx={{ width: 600, margin: 'auto'}}
-            // options={top100Films}
-            options={ top100Songs.map((option) => option.song_title )}
-            // onChange={(event, value) => console.log(value)}
-            onChange={(event, v) =>  autoInput = v}
-            // options={["option1", "option2", "another option"]}
-            // getOptionLabel={(option) => option.title}
-            renderInput={(params) => (
-              <div id="container">
-                <Box
-                  sx={{
-                    width: '60%',
-                    margin: 'auto'
-                  }}
-                >
-                
-                  <TextField id="inputSolution"  {...params} sx={{ position: "center", background: "white", input: { color: 'black' } }} label="Guess your song!" margin="normal" onChange={this.saveInput}/>
-                </Box>
-              </div>
-              
-            )}
-            // renderOption={(props, option, { inputValue }) => {
-            //     const matches = match(option.title, inputValue);
-            //     const parts = parse(option.title, matches);
-
-            //     return (                
-            //     <li {...props}>
-            //         <div>
-            //         {parts.map((part, index) => (
-            //             <span
-            //             key={index}
-            //             style={{
-            //                 fontWeight: part.highlight ? 700 : 400,
-            //             }}
-            //             >
-            //             {part.text}
-            //             </span>
-            //         ))}
-            //         </div>
-            //     </li>
-            //     );
-            // }}
-        />
+      <div className="Home" >
+        <div className='vl' />
+        <h1 className='scoreheader'>SCORE: {this.state.correct}/5</h1>
+        <h1>{"SPLICIFY"}</h1>
+        <hr className="block" />
+        <div>
+          <h2>DO YOU KNOW WHAT SONG SPLICE {this.state.albumNum + 1} IS?</h2>
+          <canvas className="canvas" ref='canvas' id="canvas" width={300} height={300}></canvas>
+          <div className='textbox' id='guesser' >
             {/* <input autoComplete="off" type="text" id="input" onChange={this.saveInput} /> */}
-            {/* <button onClick={() => { this.addNewItem(); document.getElementById('input').value = ''; }}> Submit </button> */}
+            <Button onClick={() => { this.setPlay(this.state.albumNum) }}>HINT</Button>
+
+            <Autocomplete
+              id="highlights-demo"
+              freeSolo
+              autoSelect
+              sx={{ width: 600, margin: 'auto'}}
+              options={ top100Songs.map((option) => option.song_title )}
+              onChange={(event, v) =>  autoInput = v}
+              renderInput={(params) => (
+                <div id="container">
+                  <Box
+                    sx={{
+                      width: '60%',
+                      margin: 'auto'
+                    }}
+                  >
+                  
+                    <TextField id="input"  {...params} sx={{ position: "center", background: "white", input: { color: 'black' } }} label="Guess your song!" margin="normal" onChange={this.saveInput}/>
+                  </Box>
+                </div>
+                
+              )}
+            />
             <Button variant="contained" type="submit" onClick={() => { this.addNewItem(); }}>
               Submit
             </Button>
             <br/>
             <br/>
+            {/* <button onClick={() => { this.addNewItem(); document.getElementById('input').value = ''; }}> Submit </button> */}
           </div>
+          <br/>
+          <Button variant="contained" id='next' onClick={() => { this.nextAlbum() }}>
+            Next
+          </Button>
+          {/* <button onClick={() => { this.nextAlbum() }} id='next'> Next </button> */}
         </div>
-
+        <hr className="horizontalline2" />
+        <div className='didnotgetit' id='failed' >SORRY YOU DIDN'T GET IT ...</div>
+        <div className='congrats' id='passed' >CONGRATS! YOU GOT IT ...</div>
 
       </div>
     );
