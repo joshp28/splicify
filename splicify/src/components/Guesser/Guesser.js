@@ -59,6 +59,8 @@ class Guesser extends Component {
     document.getElementById('passed').style.display = 'none'
     document.getElementById('guesser').style.display = ''
     document.getElementById('next').style.display = 'none'
+    document.getElementById('artistHint').style.display = 'none';
+    document.getElementById('hintButton').style.display = 'none';
     return;
   }
 
@@ -68,7 +70,8 @@ class Guesser extends Component {
     correct: 0,
     answers: [],
     loaded,
-    albumNum: 0
+    albumNum: 0,
+    hints: 0
   };
 
   // handlePlay = () => setPlay(true);
@@ -159,10 +162,12 @@ class Guesser extends Component {
       document.getElementById('failed').style.display = '';
       document.getElementById('guesser').style.display = 'none';
       document.getElementById('next').style.display = '';
+      document.getElementById('artistHint').style.display = 'none';
     }
     // guess wrong but have more submissions
     else {
       this.setState({ input: null, tries: tries + 1 });
+      document.getElementById('hintButton').style.display = '';
 
     }
 
@@ -171,15 +176,46 @@ class Guesser extends Component {
     // console.log(autoInput);
     // console.log("SONGTITLE");
 
-    //console.log(this.state);
+    console.log(this.state.loaded);
     return;
   };
 
+  getArtists = () => {
+    var artists = "";
+    let artsitArray = mydata.songs[this.state.albumNum].song_artist;
+    let artistLength = mydata.songs[this.state.albumNum].song_artist.length;
+    if ( artistLength > 1){
+      artists += "S ARE ";
+    }
+    else {
+      artists += " IS ";
+    }
+    for (var i=0; i < artistLength; i++){
+      if ( i > 0)
+      {
+        artists += " AND ";
+      }
+      artists += artsitArray[i];
+      
+    }
+    return artists.toUpperCase();
+  }
 
+  getHint = () => {
+    if(this.state.hints == 0  ){
+      document.getElementById('artistHint').style.display = '';
+      document.getElementById('hintButton').style.display = 'none';
+      this.setState({ hints: 1 });
+    }
+    else{
+      this.setPlay(this.state.albumNum);
+    }
+    return
+  }
 
   nextAlbum = () => {
 
-    this.setState({ albumNum: this.state.albumNum + 1, tries: 0 });
+    this.setState({ input: null, albumNum: this.state.albumNum + 1, tries: 0 });
     document.getElementById('guesser').style.display = '';
     document.getElementById('passed').style.display = 'none';
     document.getElementById('failed').style.display = 'none';
@@ -204,10 +240,6 @@ class Guesser extends Component {
 
   cropImg() {
     // let { loaded } = this.state;
-    
-    
-
-    
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
 
@@ -272,10 +304,11 @@ class Guesser extends Component {
         <hr className="block" />
         <div>
           <h2>DO YOU KNOW WHAT SONG SPLICE {this.state.albumNum + 1} IS?</h2>
+          <h2 id='artistHint'>THE ARTIST{this.getArtists()}</h2>
           <canvas className="canvas" ref='canvas' id="canvas" width={300} height={300}></canvas>
           <div className='textbox' id='guesser' >
             {/* <input autoComplete="off" type="text" id="input" onChange={this.saveInput} /> */}
-            <Button onClick={() => { this.setPlay(this.state.albumNum) }}>HINT</Button>
+            <Button id='hintButton' onClick={() => { this.getHint() }}>HINT</Button>
 
             <Autocomplete
               id="highlights-demo"
