@@ -1,11 +1,17 @@
 import './Introduction.css';
-import spliced from '../../images/Cube.png';
-import btn from '../../images/Enter_btn.png';
+import spliced from '../../images/splicify.svg';
+import go from '../../images/go.svg';
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+
+
+import {withRouter} from 'react-router-dom';
+
+import { Link } from 'react-router-dom';
+import {NavLink} from "react-router-dom";
 
 
 const style = {
@@ -29,10 +35,16 @@ function Introduction() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    function nextPath(path) {
+        this.props.history.push(path);
+    }
+
+    
+
     return (
-        <div>
+        <div id = "wrapper">
             <header className="Home">
-                <Button onClick={handleOpen}>Share</Button>
+                {/* <Button onClick={handleOpen}>Share</Button>
                 <Modal
                     open={open}
                     onClose={handleClose}
@@ -48,25 +60,37 @@ function Introduction() {
                     </Typography>
                     
                 </Box>
-                </Modal>
+                </Modal> */}
                 
-                <h2>{"Welcome to"}</h2>
-                <h1>{"Splicify"}</h1>
-                <img src={spliced} className="Home-logo" alt="spliced" />
-                {showIntro &&
-                    <div>
-                        <h3>{"Your top 5 albums will be spliced onto this cube."}</h3>
-                        <h3>{"Try to guess your top albums and see if your friends can guess them right!"}</h3>
-                    </div>
-                }
-                {!showIntro &&
+                {/* <img src={btn} className="btn"  onClick={() => setShowIntro(!showIntro)} /> */}
 
-                    <h3>{"Creating your Splicify Now ..."}</h3>                    
-
-                }   
-                <img src={btn} className="btn"  onClick={() => setShowIntro(!showIntro)} />
+                
                                 
             </header>
+            <div id="vl"></div>
+            <div id='top'>
+                <h1 id = 'title'>{"SPLICIFY"}</h1>
+                <div id = 'labels'>
+                    
+                </div>
+            </div>
+
+
+            <div id='middle'>
+                <hr id='top-line'></hr>
+                <div id='blurb'>
+                     <h3>{"Can you get all top 5 songs of songs correct? Let’s see if you can figure out what songs are on your Splicify. Share with your friends and see if they can guess them right too."}</h3>
+                </div>
+
+                <img src={spliced} id="Home-logo" alt="spliced" />
+            </div>
+
+            <div id='bottom'>
+                <hr id='bottom-line'></hr>
+                <Button component={Link} to="/guesser/">
+                    <img src = {go} id = "go"/>
+                </Button>
+            </div>
 
             
         </div>
@@ -76,4 +100,7 @@ function Introduction() {
     )
 }
 
+
+
 export default Introduction;
+// export default withRouter(Introduction);

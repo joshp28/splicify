@@ -7,6 +7,8 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Results from './components/Results/Results';
 
 function App() {
+
+  
   
   return (
     
@@ -18,6 +20,8 @@ function App() {
         <Route path="/results" exact element={<Results/>} />
       </Routes>
     </Router>
+
+    
 
     
   )
