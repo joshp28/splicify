@@ -94,8 +94,9 @@ hr {
 }
 
 .horizontalline2 {
+    position: static;
     margin-top: 8vh;
-    /* margin-bottom: 2vh; */
+    bottom: 10px;
 }
 
 .didnotgetit {

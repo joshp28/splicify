@@ -10,7 +10,7 @@ import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 import Box from '@mui/material/Box';
 
-
+import Results from '../Results/Results.js';
 
 import Button from '@mui/material/Button';
 
@@ -21,7 +21,7 @@ import loaded from "../../spotify_info.json";
 
 
 // const handlePlay = () => setPlay(true);
-    
+
 // var audio = new Audio("https://p.scdn.co/mp3-preview/8553a21392d68592e6884a15f28909a499663b1c?cid=1065d1fc90714ae18996972cb4abd133");
 var data = loaded;
 var mydata = JSON.parse(data);
@@ -29,7 +29,7 @@ var copyData = JSON.parse(data);
 
 // console.log("TOP");
 // const top100Songs = mydata.songs;
-const top100Songs = copyData.songs.sort( () => Math.random() - 0.5) ;
+const top100Songs = copyData.songs.sort(() => Math.random() - 0.5);
 // var mydata = JSON.parse(data);.sort( () => Math.random() - 0.5) );
 
 
@@ -49,10 +49,9 @@ var autoInput = "";
 // }
 
 
-import Results from '../Results/Results.js';
-
 
 class Guesser extends Component {
+  
   componentDidMount() {
     this.cropImg();
     document.getElementById('failed').style.display = 'none'
@@ -61,6 +60,9 @@ class Guesser extends Component {
     document.getElementById('next').style.display = 'none'
     document.getElementById('artistHint').style.display = 'none';
     document.getElementById('hintButton').style.display = 'none';
+    document.getElementById('getResults').style.display = 'none';
+    // document.getElementById('results').style.display = 'none';
+    
     return;
   }
 
@@ -76,17 +78,17 @@ class Guesser extends Component {
 
   // handlePlay = () => setPlay(true);
 
-  setPlay(albumNum){
+  setPlay(albumNum) {
     // console.log("HEREEEE");
     // console.log(mydata.songs[albumNum].preview_url);
     // var audio = new Audio("https://p.scdn.co/mp3-preview/8553a21392d68592e6884a15f28909a499663b1c?cid=1065d1fc90714ae18996972cb4abd133");
-    var audio = new Audio(mydata.songs[albumNum].preview_url);    
+    var audio = new Audio(mydata.songs[albumNum].preview_url);
     audio.pause();
     audio.currentTime = 0;
     audio.play();
-    setTimeout(function() {
-        audio.pause();
-        audio.currentTime = 0;
+    setTimeout(function () {
+      audio.pause();
+      audio.currentTime = 0;
     }, 5000);
   }
   // state = {
@@ -130,7 +132,7 @@ class Guesser extends Component {
 
     // guess three times and activate hints on each wrong submission
     // guess it right
-    if (input != null && input.toLowerCase() ===  mydata.songs[albumNum].song_title.toLowerCase()) {
+    if (input != null && input.toLowerCase() === mydata.songs[albumNum].song_title.toLowerCase()) {
       answers.push("Correct");
       console.log(input);
       this.setState({ correct: correct + 1 });
@@ -140,20 +142,20 @@ class Guesser extends Component {
       // console.log(spotify[albumNum].song_title);
     }
     else if (autoInput != null && autoInput.toLowerCase() === mydata.songs[albumNum].song_title.toLowerCase()) {
-      
+
       // console.log(autoInput);
       // console.log(spotify[albumNum].song_title);
       // console.log(albumNum);
       // this.setState({ albumNum: this.state.albumNum + 1, tries: 0 });
-      
+
 
       answers.push("Correct");
       this.setState({ correct: correct + 1 });
       document.getElementById('passed').style.display = '';
       document.getElementById('guesser').style.display = 'none';
       document.getElementById('next').style.display = '';
-      
-      
+
+
 
     }
     // guess it wrong
@@ -171,12 +173,22 @@ class Guesser extends Component {
 
     }
 
+    if (this.state.answers.length === 5) {
+     
+      document.getElementById('guesser').style.display = 'none';
+      document.getElementById('passed').style.display = 'none';
+      document.getElementById('failed').style.display = 'none';
+      document.getElementById('next').style.display = 'none';
+      document.getElementById('getResults').style.display = '';
+     
+    }
+
     // console.log("SONGTITLE");
     // console.log(mydata.songs[albumNum].song_title);
     // console.log(autoInput);
     // console.log("SONGTITLE");
 
-    console.log(this.state.loaded);
+    console.log(this.state.answers.length);
     return;
   };
 
@@ -184,30 +196,29 @@ class Guesser extends Component {
     var artists = "";
     let artsitArray = mydata.songs[this.state.albumNum].song_artist;
     let artistLength = mydata.songs[this.state.albumNum].song_artist.length;
-    if ( artistLength > 1){
+    if (artistLength > 1) {
       artists += "S ARE ";
     }
     else {
       artists += " IS ";
     }
-    for (var i=0; i < artistLength; i++){
-      if ( i > 0)
-      {
+    for (var i = 0; i < artistLength; i++) {
+      if (i > 0) {
         artists += " AND ";
       }
       artists += artsitArray[i];
-      
+
     }
     return artists.toUpperCase();
   }
 
   getHint = () => {
-    if(this.state.hints == 0  ){
+    if (this.state.hints == 0) {
       document.getElementById('artistHint').style.display = '';
       document.getElementById('hintButton').style.display = 'none';
       this.setState({ hints: 1 });
     }
-    else{
+    else {
       this.setPlay(this.state.albumNum);
     }
     return
@@ -215,11 +226,21 @@ class Guesser extends Component {
 
   nextAlbum = () => {
 
-    this.setState({ input: null, albumNum: this.state.albumNum + 1, tries: 0 });
+    this.setState({ hints: 0, input: null, albumNum: this.state.albumNum + 1, tries: 0 });
     document.getElementById('guesser').style.display = '';
     document.getElementById('passed').style.display = 'none';
     document.getElementById('failed').style.display = 'none';
     document.getElementById('next').style.display = 'none'
+    document.getElementById('artistHint').style.display = 'none';
+
+    return;
+  }
+
+  getResults = () => {
+
+    this.setState({ results: true });
+    document.getElementById('guesserblock').style.display = 'none';
+
 
     return;
   }
@@ -277,7 +298,7 @@ class Guesser extends Component {
     }
   }
 
-  
+
 
   render() {
 
@@ -292,9 +313,9 @@ class Guesser extends Component {
     //   { song_title: 'Pulp Fiction', year: 1994 },
     //   { song_title: 'The Lord of the Rings: The Return of the King', year: 2003}
     // ];
-    
+
     // console.log(top100Songs);
-    
+    const{loaded} = this.state;
 
     return (
       <div className="Home" >
@@ -302,9 +323,9 @@ class Guesser extends Component {
         <h1 className='scoreheader'>SCORE: {this.state.correct}/5</h1>
         <h1>{"SPLICIFY"}</h1>
         <hr className="block" />
-        <div>
+        <div id='guesserblock'>
           <h2>DO YOU KNOW WHAT SONG SPLICE {this.state.albumNum + 1} IS?</h2>
-          <h2 id='artistHint'>THE ARTIST{this.getArtists()}</h2>
+          <h2 id='artistHint'>HINT: THE ARTIST{this.getArtists()}</h2>
           <canvas className="canvas" ref='canvas' id="canvas" width={300} height={300}></canvas>
           <div className='textbox' id='guesser' >
             {/* <input autoComplete="off" type="text" id="input" onChange={this.saveInput} /> */}
@@ -314,9 +335,9 @@ class Guesser extends Component {
               id="highlights-demo"
               freeSolo
               autoSelect
-              sx={{ width: 600, margin: 'auto'}}
-              options={ top100Songs.map((option) => option.song_title )}
-              onChange={(event, v) =>  autoInput = v}
+              sx={{ width: 600, margin: 'auto' }}
+              options={top100Songs.map((option) => option.song_title)}
+              onChange={(event, v) => autoInput = v}
               renderInput={(params) => (
                 <div id="container">
                   <Box
@@ -325,26 +346,31 @@ class Guesser extends Component {
                       margin: 'auto'
                     }}
                   >
-                  
-                    <TextField id="input"  {...params} sx={{ position: "center", background: "white", input: { color: 'black' } }} label="Guess your song!" margin="normal" onChange={this.saveInput}/>
+
+                    <TextField id="input"  {...params} sx={{ position: "center", background: "white", input: { color: 'black' } }} label="Guess your song!" margin="normal" onChange={this.saveInput} />
                   </Box>
                 </div>
-                
+
               )}
             />
             <Button variant="contained" type="submit" onClick={() => { this.addNewItem(); }}>
               Submit
             </Button>
-            <br/>
-            <br/>
+            <br />
+            <br />
             {/* <button onClick={() => { this.addNewItem(); document.getElementById('input').value = ''; }}> Submit </button> */}
           </div>
-          <br/>
+
+          <br />
           <Button variant="contained" id='next' onClick={() => { this.nextAlbum() }}>
             Next
           </Button>
+          <Button variant="contained" id='getResults' onClick={() => { this.getResults() }}>
+            Results
+          </Button>
           {/* <button onClick={() => { this.nextAlbum() }} id='next'> Next </button> */}
         </div>
+        {this.state.results && <Results id='results' data={this.state}></Results>}
         <hr className="horizontalline2" />
         <div className='didnotgetit' id='failed' >SORRY YOU DIDN'T GET IT ...</div>
         <div className='congrats' id='passed' >CONGRATS! YOU GOT IT ...</div>

@@ -1,27 +1,27 @@
-import React, { Component }  from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Results.css';
-import loaded from "../../spotify_info.json";
+// import loaded from "../../spotify_info.json";
 
-
-var data = loaded;
-var mydata = JSON.parse(data);
-
+var data;
+var mydata;
+var answers
 class Results extends Component {
 
+  
+  constructor(props) {
+    super(props);
+
+    data = this.props.data.loaded;
+    answers = this.props.data.answers;
+    mydata = JSON.parse(data);
+  
+  }
   componentDidMount() {
     this.cropImg();
-    console.log(this.state);
+
   };
 
-  state = {
-    tries: 0,
-    answers: ["Correct", "Correct", "Correct", "Correct", "Correct"],
-    loaded,
-    albumNum: 0
-  };
-
-  
   cropImg() {
     // let { loaded } = this.state;
     const canvas = document.getElementById('canvasResults');
@@ -61,26 +61,19 @@ class Results extends Component {
 
 
   render() {
+
     return (
-      
 
       <div className="Home" >
-        <div className='vl' />
-        <h1 className='scoreheader'>SCORE: {this.state.correct}/5</h1>
-        <h1>{"SPLICIFY"}</h1>
-        <hr className="block" />
-        <div>
+
         <canvas className="canvasResults" ref='canvasResults' id="canvasResults" width={500} height={500}></canvas>
         <div className="answers">
-          <h2>{mydata.songs[0].song_title}: {this.state.answers[0]}</h2>
-          <h2>{mydata.songs[1].song_title}: {this.state.answers[1]}</h2>
-          <h2>{mydata.songs[2].song_title}: {this.state.answers[2]}</h2>
-          <h2>{mydata.songs[3].song_title}: {this.state.answers[3]}</h2>
-          <h2>{mydata.songs[4].song_title}: {this.state.answers[4]}</h2>
+          <h2>{mydata.songs[0].song_title}: {answers[0]}</h2>
+          <h2>{mydata.songs[1].song_title}: {answers[1]}</h2>
+          <h2>{mydata.songs[2].song_title}: {answers[2]}</h2>
+          <h2>{mydata.songs[3].song_title}: {answers[3]}</h2>
+          <h2>{mydata.songs[4].song_title}: {answers[4]}</h2>
         </div>
-        </div>
-        <hr className="horizontalline2" />
-
       </div>
     );
   }
