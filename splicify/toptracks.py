@@ -71,11 +71,13 @@ def get_current_track(access_token):
     current_song = {}
     for i in song_list:
         # print(i)
-        artist_names = ''
+        artist_names = '['
         for x in i['artists']:
+            artist_names += '"'
             artist_names += x['name']
-            artist_names += '; '
-        # artist_names -= ', '
+            artist_names += '", '
+        artist_names -= ', '
+        artist_names += ']'
         # response += '{\nsong title: ' + i['name'] + '\nsong artist: ' + i['artists'][0]['name'] + '\nimage url: ' + i['album']['images'][0]['url'] + '\n}\n'
         response += "{ song_title: " + i['name'] + " song_artist: " + artist_names + " image_url: " + i['album']['images'][0]['url'] + " "
         if i['preview_url'] != None:
