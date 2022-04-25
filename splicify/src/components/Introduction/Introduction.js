@@ -8,6 +8,12 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
 
+import {withRouter} from 'react-router-dom';
+
+import { Link } from 'react-router-dom';
+import {NavLink} from "react-router-dom";
+
+
 const style = {
     position: 'relative',
     top: '50%',
@@ -28,6 +34,12 @@ function Introduction() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    function nextPath(path) {
+        this.props.history.push(path);
+    }
+
+    
 
     return (
         <div>
@@ -65,6 +77,10 @@ function Introduction() {
 
                 }   
                 <img src={btn} className="btn"  onClick={() => setShowIntro(!showIntro)} />
+
+                <Button component={Link} to="/guesser/">
+                    GO
+                </Button>
                                 
             </header>
 
@@ -76,4 +92,7 @@ function Introduction() {
     )
 }
 
+
+
 export default Introduction;
+// export default withRouter(Introduction);
