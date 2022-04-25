@@ -42,7 +42,7 @@ function Introduction() {
     
 
     return (
-        <div className = "wrapper">
+        <div id = "wrapper">
             <header className="Home">
                 {/* <Button onClick={handleOpen}>Share</Button>
                 <Modal
@@ -67,23 +67,28 @@ function Introduction() {
                 
                                 
             </header>
-            <div className='top'>
-                <h1>{"SPLICIFY"}</h1>
+            <div id="vl"></div>
+            <div id='top'>
+                <h1 id = 'title'>{"SPLICIFY"}</h1>
+                <div id = 'labels'>
+                    
+                </div>
             </div>
 
 
-            <div className='middle'>
-                <img src={spliced} className="Home-logo" alt="spliced" />
-                {showIntro &&
-                    <div>
-                        <h3>{"Can you get all top 5 songs of songs correct? Let’s see if you can figure out what songs are on your Splicify. Share with your friends and see if they can guess them right too."}</h3>
-                    </div>
-                }
+            <div id='middle'>
+                <hr id='top-line'></hr>
+                <div id='blurb'>
+                     <h3>{"Can you get all top 5 songs of songs correct? Let’s see if you can figure out what songs are on your Splicify. Share with your friends and see if they can guess them right too."}</h3>
+                </div>
+
+                <img src={spliced} id="Home-logo" alt="spliced" />
             </div>
 
-            <div className='bottom'>
+            <div id='bottom'>
+                <hr id='bottom-line'></hr>
                 <Button component={Link} to="/guesser/">
-                    <img src = {go} className = "go"/>
+                    <img src = {go} id = "go"/>
                 </Button>
             </div>
 

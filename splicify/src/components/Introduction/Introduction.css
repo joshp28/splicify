@@ -1,26 +1,80 @@
-.wrapper {
+#wrapper {
     margin-top: 5vh;
     margin-left: 5vw;
     margin-right: 5vw;
     margin-bottom: 5vh;
+    height: 90vh;
+    overflow: hidden;
 }
 
 .Home {
     color: black;
     font-family: Helvetica;
-  }
-
-.Home-logo {
-    height: 150px;
 }
 
-h1 {
-    font-weight: 900;
+#Home-logo {
+    width: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#title {
+    font-weight: 300;
     color: black;
     font-size: 6em;
+    text-align: left;
+    margin-left: 0;
+}
+
+#top {
+    position: inherit;
+    height: 20vh;
+    vertical-align: bottom;
+    border: 1px solid transparent;
+}
+
+#middle { 
+    position: inherit;
+    height: 50vh;
+    vertical-align: middle;
+}
+
+#bottom {
+    position: inherit;
+    height: 20vh;
+    vertical-align: top;
     text-align: right;
 }
 
+#top-line {
+    width: 100%;
+    margin-left: auto;
+    margin-right: 0vw;
+    margin-top: 0%;
+}
+
+#bottom-line {
+    width: 70%;
+    margin-left: auto;
+    margin-right: 0vw;
+    margin-top: 0%;
+}
+
+#go {
+    margin-right: 8vw;
+}
+
+#vl{
+    height: 90vh;
+    border-right: 2px solid black;
+    position: absolute;
+    right: 10vw;
+}
+
+#blurb{
+    width: 30vw;
+}
 
 #modal-modal-title {
     /* text-align: center; */
