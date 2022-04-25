@@ -1,8 +1,13 @@
+.wrapper {
+    margin-top: 5vh;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-bottom: 5vh;
+}
+
 .Home {
-    text-align: center;
-    color: yellow;
+    color: black;
     font-family: Helvetica;
-    
   }
 
 .Home-logo {
@@ -10,21 +15,12 @@
 }
 
 h1 {
-    font-weight: bold;
-    color: #5C49DD;
-    font-size: 80px;
+    font-weight: 900;
+    color: black;
+    font-size: 6em;
+    text-align: right;
 }
 
-
-.btn {
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    bottom: 10%;
-    cursor: pointer;
-} 
 
 #modal-modal-title {
     /* text-align: center; */
