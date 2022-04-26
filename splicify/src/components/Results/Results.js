@@ -64,10 +64,10 @@ class Results extends Component {
 
     return (
 
-      <div className="Home" >
+      <div id="Home" >
 
         <canvas className="canvasResults" ref='canvasResults' id="canvasResults" width={500} height={500}></canvas>
-        <div className="answers">
+        <div id="answers">
           <h2>{mydata.songs[0].song_title}: {answers[0]}</h2>
           <h2>{mydata.songs[1].song_title}: {answers[1]}</h2>
           <h2>{mydata.songs[2].song_title}: {answers[2]}</h2>
