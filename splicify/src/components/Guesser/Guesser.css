@@ -51,10 +51,6 @@ h2 {
     font-size: 16;
 }
 
-.textbox {
-    /* bottom: 5px; */
-    position: center;
-}
 
 .center {
     display: block;
@@ -94,14 +90,16 @@ hr {
 }
 
 .horizontalline2 {
-    position: static;
-    margin-top: 8vh;
-    bottom: 10px;
+    position: absolute;
+    /* margin-top: 8vh; */
+    bottom: 10vh;
 }
 
-.didnotgetit {
-    margin-top: 1vh;
-    margin-bottom: 2vh;
+.feedback {
+    position: absolute;
+    bottom: 2vh;
+    margin-left: 5vw;
+    text-align: left;
     font-size: 4em;
     font-weight: bold;
     font-weight: 300;
@@ -109,7 +107,8 @@ hr {
     font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
-.congrats {
+/* .congrats {
+    position: absolute;
     margin-top: 1vh;
     margin-bottom: 0vh;
     font-size: 4em;
@@ -117,7 +116,7 @@ hr {
     font-weight: 300;
     color: black;
     font-family: 'Helvetica', 'Arial', sans-serif;
-}
+} */
 
 .scoreheader {
     border: 1px solid black;

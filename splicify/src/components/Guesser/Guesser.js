@@ -236,7 +236,7 @@ class Guesser extends Component {
   }
 
   getResults = () => {
-    
+
     document.getElementById('passed').style.display = 'none';
     document.getElementById('failed').style.display = 'none';
     this.setState({ results: true });
@@ -373,8 +373,10 @@ class Guesser extends Component {
         </div>
         {this.state.results && <Results id='results' data={this.state}></Results>}
         <hr className="horizontalline2" />
-        <div className='didnotgetit' id='failed' >SORRY YOU DIDN'T GET IT ...</div>
-        <div className='congrats' id='passed' >CONGRATS! YOU GOT IT ...</div>
+        <div className='feedback'>
+          <div id='failed' >SORRY YOU DIDN'T GET IT</div>
+          <div id='passed' >CONGRATS! YOU GOT IT</div>
+        </div>
 
       </div>
     );
