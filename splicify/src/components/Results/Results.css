@@ -74,12 +74,15 @@ hr {
 
 .horizontalline2 {
     /* margin-top: 8vh; */
-    bottom: 20px;
+    width: 97vw;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #answers {
     margin-top: 15vh;
     margin-left: 50vw;
+    height: 40vh;
 }
 
 
