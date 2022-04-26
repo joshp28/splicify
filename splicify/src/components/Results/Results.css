@@ -49,6 +49,9 @@ h2 {
     margin-left: 15vw;
     margin-right: auto;
     float: left;
+    /* margin-top: 5vh; */
+    margin-bottom: 5vh;
+    
 }
 
 .block {
@@ -80,9 +83,10 @@ hr {
 }
 
 #answers {
-    margin-top: 15vh;
+    margin-top: 5vh;
     margin-left: 50vw;
     height: 40vh;
+    align-content: center;
 }
 
 

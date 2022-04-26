@@ -31,31 +31,31 @@ class Results extends Component {
     var image1 = new Image();
     image1.src = mydata.songs[0].image_url;
     image1.onload = function () {
-      ctx.drawImage(image1, (image1.width / 2) - 50, 0, 100, 500, 0, 0, 60, 300);
+      ctx.drawImage(image1, (image1.width / 2) - 50, 0, 100, 500, 0, 0, 100, 500);
     }
 
     var image2 = new Image();
     image2.src = mydata.songs[1].image_url;
     image2.onload = function () {
-      ctx.drawImage(image2, (image2.width / 2) - 50, 0, 100, 500, 60, 0, 60, 300);
+      ctx.drawImage(image2, (image2.width / 2) - 50, 0, 100, 500, 100, 0, 100, 500);
     }
 
     var image3 = new Image();
     image3.src = mydata.songs[2].image_url;
     image3.onload = function () {
-      ctx.drawImage(image3, (image3.width / 2) - 50, 0, 100, 500, 120, 0, 60, 300);
+      ctx.drawImage(image3, (image3.width / 2) - 50, 0, 100, 500, 200, 0, 100, 500);
     }
 
     var image4 = new Image();
     image4.src = mydata.songs[3].image_url;
     image4.onload = function () {
-      ctx.drawImage(image4, (image4.width / 2) - 50, 0, 100, 500, 180, 0, 60, 300);
+      ctx.drawImage(image4, (image4.width / 2) - 50, 0, 100, 500, 300, 0, 100, 500);
     }
 
     var image5 = new Image();
     image5.src = mydata.songs[4].image_url;
     image5.onload = function () {
-      ctx.drawImage(image5, (image5.width / 2) - 50, 0, 100, 500, 240, 0, 60, 300);
+      ctx.drawImage(image5, (image5.width / 2) - 50, 0, 100, 500, 400, 0, 100, 500);
     }
   }
 

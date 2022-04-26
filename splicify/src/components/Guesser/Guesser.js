@@ -176,8 +176,6 @@ class Guesser extends Component {
     if (this.state.answers.length === 5) {
      
       document.getElementById('guesser').style.display = 'none';
-      document.getElementById('passed').style.display = 'none';
-      document.getElementById('failed').style.display = 'none';
       document.getElementById('next').style.display = 'none';
       document.getElementById('getResults').style.display = '';
      
@@ -232,12 +230,15 @@ class Guesser extends Component {
     document.getElementById('failed').style.display = 'none';
     document.getElementById('next').style.display = 'none'
     document.getElementById('artistHint').style.display = 'none';
+    document.getElementById('hintButton').style.display = 'none';
 
     return;
   }
 
   getResults = () => {
-
+    
+    document.getElementById('passed').style.display = 'none';
+    document.getElementById('failed').style.display = 'none';
     this.setState({ results: true });
     document.getElementById('guesserblock').style.display = 'none';
 
