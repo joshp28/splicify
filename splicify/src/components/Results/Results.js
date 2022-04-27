@@ -23,7 +23,6 @@ class Results extends Component {
   };
 
   cropImg() {
-    // let { loaded } = this.state;
     const canvas = document.getElementById('canvasResults');
     const ctx = canvas.getContext('2d');
 
@@ -37,7 +36,7 @@ class Results extends Component {
     var image2 = new Image();
     image2.src = mydata.songs[1].image_url;
     image2.onload = function () {
-      ctx.drawImage(image2, (image2.width / 2) - 50, 0, 100, 500, 100, 0, 100, 500);
+      ctx.drawImage(image2, (image2.width / 2) - 50, 10, 100, 500, 100, 0, 100, 500);
     }
 
     var image3 = new Image();

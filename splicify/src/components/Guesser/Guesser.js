@@ -49,10 +49,20 @@ var autoInput = "";
 // }
 
 
+let cssfilter;
+
+
+var image1 = new Image();
+var image2 = new Image();
+var image3 = new Image();
+var image4 = new Image();
+var image5 = new Image();
+
 
 class Guesser extends Component {
   
   componentDidMount() {
+    console.log("MOUNT");
     this.cropImg();
     document.getElementById('failed').style.display = 'none'
     document.getElementById('passed').style.display = 'none'
@@ -76,12 +86,7 @@ class Guesser extends Component {
     hints: 0
   };
 
-  // handlePlay = () => setPlay(true);
-
   setPlay(albumNum) {
-    // console.log("HEREEEE");
-    // console.log(mydata.songs[albumNum].preview_url);
-    // var audio = new Audio("https://p.scdn.co/mp3-preview/8553a21392d68592e6884a15f28909a499663b1c?cid=1065d1fc90714ae18996972cb4abd133");
     var audio = new Audio(mydata.songs[albumNum].preview_url);
     audio.pause();
     audio.currentTime = 0;
@@ -91,36 +96,6 @@ class Guesser extends Component {
       audio.currentTime = 0;
     }, 5000);
   }
-  // state = {
-  //   tries: 0,
-  //   answers: [],
-  //   spotify: [{
-  //     "song_title": "Getcho Mans",
-  //     "song_artist": "Rich Brian", // Warren Hue;",
-  //     "image_url": "https://i.scdn.co/image/ab67616d0000b2732bb23b6519784ea65df29a8b"
-  //   },
-  //   {
-  //     "song_title": "edamame",
-  //     "song_artist": "bbno$", //; Rich Brian;",
-  //     "image_url": "https://i.scdn.co/image/ab67616d0000b273545a202ab06885cf2c6621ca"
-  //   },
-  //   {
-  //     "song_title": "damn Right",
-  //     "song_artist": "AUDREY NUNA",
-  //     "image_url": "https://i.scdn.co/image/ab67616d0000b27368db4b081db9b8a63483e052"
-  //   },
-  //   {
-  //     "song_title": "SOMEBODY",
-  //     "song_artist": "keshi",
-  //     "image_url": "https://i.scdn.co/image/ab67616d0000b2739922f27cab942f36da3f909e"
-  //   },
-  //   {
-  //     "song_title": "Lovers In The Night",
-  //     "song_artist": "Seori",
-  //     "image_url": "https://i.scdn.co/image/ab67616d0000b273f40a36b5fd31d9817c34b070"
-  //   }],
-  //   albumNum: 0
-  // };
 
   saveInput = (e) => {
     this.setState({ input: e.target.value });
@@ -129,12 +104,14 @@ class Guesser extends Component {
 
   addNewItem = () => {
     let { answers, input, loaded, albumNum, tries, correct } = this.state;
+    console.log("ADDNEWITEM");
+    this.cropImg();
 
     // guess three times and activate hints on each wrong submission
     // guess it right
     if (input != null && input.toLowerCase() === mydata.songs[albumNum].song_title.toLowerCase()) {
       answers.push("Correct");
-      console.log(input);
+      // console.log(input);
       this.setState({ correct: correct + 1 });
       document.getElementById('passed').style.display = '';
       document.getElementById('guesser').style.display = 'none';
@@ -181,12 +158,6 @@ class Guesser extends Component {
      
     }
 
-    // console.log("SONGTITLE");
-    // console.log(mydata.songs[albumNum].song_title);
-    // console.log(autoInput);
-    // console.log("SONGTITLE");
-
-    console.log(this.state.answers.length);
     return;
   };
 
@@ -202,7 +173,6 @@ class Guesser extends Component {
     }
     for (var i = 0; i < artistLength; i++) {
       if (artsitArray[i] === ",") {
-        console.log("PARSE");
         if (artsitArray[i+1] === " " && artsitArray[i+2] === "]") {
           continue;
         }
@@ -224,7 +194,7 @@ class Guesser extends Component {
         artists += artsitArray[i];
       }
       
-      console.log(artists);
+      // console.log(artists);
 
     }
     return artists.toUpperCase();
@@ -245,14 +215,20 @@ class Guesser extends Component {
   }
 
   nextAlbum = () => {
-
-    this.setState({ hints: 0, input: null, albumNum: this.state.albumNum + 1, tries: 0 });
+    this.state.albumNum+=1;
+    this.input = null;
+    this.hints = 0;
+    this.tries = 0;
+    this.setState({ hints: 0, input: null, albumNum: this.state.albumNum, tries: 0 });
+    
     document.getElementById('guesser').style.display = '';
     document.getElementById('passed').style.display = 'none';
     document.getElementById('failed').style.display = 'none';
     document.getElementById('next').style.display = 'none'
     document.getElementById('artistHint').style.display = 'none';
     document.getElementById('hintButton').style.display = 'none';
+    console.log("NEXTALB");
+    this.cropImg();
     var button = document.getElementById('hintButton');
       button.innerText = button.textContent = 'Hint 1';
 
@@ -284,44 +260,241 @@ class Guesser extends Component {
     ctx.closePath();
   }
 
-  cropImg() {
-    // let { loaded } = this.state;
+  setImage1() {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-
-
-    var image1 = new Image();
-    // console.log("IMGSRC");
-    image1.src = mydata.songs[0].image_url;
-    // console.log("IMGSRC");
+    
     image1.onload = function () {
-      ctx.drawImage(image1, (image1.width / 2) - 50, 0, 100, 500, 0, 0, 60, 300);
+      cssfilter = "brightness(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image1, (image1.width / 2) - 50, 0, 100, 500, 0, 0, 60, 300);            
     }
 
-    var image2 = new Image();
     image2.src = mydata.songs[1].image_url;
     image2.onload = function () {
-      ctx.drawImage(image2, (image2.width / 2) - 50, 0, 100, 500, 60, 0, 60, 300);
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image2, (image2.width / 2) - 50, 10, 100, 500, 60, 0, 60, 300);
     }
 
-    var image3 = new Image();
     image3.src = mydata.songs[2].image_url;
     image3.onload = function () {
+      cssfilter = "grayscale(1)"
       ctx.drawImage(image3, (image3.width / 2) - 50, 0, 100, 500, 120, 0, 60, 300);
+      
+
     }
 
-    var image4 = new Image();
     image4.src = mydata.songs[3].image_url;
     image4.onload = function () {
+      cssfilter = "grayscale(1)"
       ctx.drawImage(image4, (image4.width / 2) - 50, 0, 100, 500, 180, 0, 60, 300);
     }
 
-    var image5 = new Image();
     image5.src = mydata.songs[4].image_url;
     image5.onload = function () {
+      cssfilter = "grayscale(1)"
       ctx.drawImage(image5, (image5.width / 2) - 50, 0, 100, 500, 240, 0, 60, 300);
+    
+    }
+    
+  }
+
+  setImage2() {
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    image1.onload = function () {
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image1, (image1.width / 2) - 50, 0, 100, 500, 0, 0, 60, 300);            
+    }
+
+    image2.src = mydata.songs[1].image_url;
+    image2.onload = function () {
+      cssfilter = "brightness(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image2, (image2.width / 2) - 50, 10, 100, 500, 60, 0, 60, 300);
+    }
+
+    image3.src = mydata.songs[2].image_url;
+    image3.onload = function () {
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image3, (image3.width / 2) - 50, 0, 100, 500, 120, 0, 60, 300);
+      
+
+    }
+
+    image4.src = mydata.songs[3].image_url;
+    image4.onload = function () {
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image4, (image4.width / 2) - 50, 0, 100, 500, 180, 0, 60, 300);
+    }
+
+    image5.src = mydata.songs[4].image_url;
+    image5.onload = function () {
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image5, (image5.width / 2) - 50, 0, 100, 500, 240, 0, 60, 300);
+    
     }
   }
+
+  setImage3() {
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    image1.onload = function () {
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image1, (image1.width / 2) - 50, 0, 100, 500, 0, 0, 60, 300);            
+    }
+
+    image2.src = mydata.songs[1].image_url;
+    image2.onload = function () {
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image2, (image2.width / 2) - 50, 10, 100, 500, 60, 0, 60, 300);
+    }
+
+    image3.src = mydata.songs[2].image_url;
+    image3.onload = function () {
+      cssfilter = "brightness(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image3, (image3.width / 2) - 50, 0, 100, 500, 120, 0, 60, 300);
+      
+
+    }
+
+    image4.src = mydata.songs[3].image_url;
+    image4.onload = function () {
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image4, (image4.width / 2) - 50, 0, 100, 500, 180, 0, 60, 300);
+    }
+
+    image5.src = mydata.songs[4].image_url;
+    image5.onload = function () {
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image5, (image5.width / 2) - 50, 0, 100, 500, 240, 0, 60, 300);
+    
+    }
+
+  }
+
+  setImage4() {
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    image1.onload = function () {
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image1, (image1.width / 2) - 50, 0, 100, 500, 0, 0, 60, 300);            
+    }
+
+    image2.src = mydata.songs[1].image_url;
+    image2.onload = function () {
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image2, (image2.width / 2) - 50, 10, 100, 500, 60, 0, 60, 300);
+    }
+
+    image3.src = mydata.songs[2].image_url;
+    image3.onload = function () {
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image3, (image3.width / 2) - 50, 0, 100, 500, 120, 0, 60, 300);
+    }
+
+    image4.src = mydata.songs[3].image_url;
+    image4.onload = function () {
+      cssfilter = "brightness(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image4, (image4.width / 2) - 50, 0, 100, 500, 180, 0, 60, 300);
+    }
+
+    image5.src = mydata.songs[4].image_url;
+    image5.onload = function () {
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image5, (image5.width / 2) - 50, 0, 100, 500, 240, 0, 60, 300);
+    
+    }
+
+  }
+
+  setImage5() {
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    image1.onload = function () {
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image1, (image1.width / 2) - 50, 0, 100, 500, 0, 0, 60, 300);            
+    }
+
+    image2.src = mydata.songs[1].image_url;
+    image2.onload = function () {
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image2, (image2.width / 2) - 50, 10, 100, 500, 60, 0, 60, 300);
+    }
+
+    image3.src = mydata.songs[2].image_url;
+    image3.onload = function () {
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image3, (image3.width / 2) - 50, 0, 100, 500, 120, 0, 60, 300);
+    }
+
+    image4.src = mydata.songs[3].image_url;
+    image4.onload = function () {
+      cssfilter = "grayscale(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image4, (image4.width / 2) - 50, 0, 100, 500, 180, 0, 60, 300);
+    }
+
+    image5.src = mydata.songs[4].image_url;
+    image5.onload = function () {
+      cssfilter = "brightness(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image5, (image5.width / 2) - 50, 0, 100, 500, 240, 0, 60, 300);
+    
+    }
+
+  }
+
+  cropImg() {
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    image1.src = mydata.songs[0].image_url;
+    if (this.state.albumNum + 1 == 1) {
+      console.log("COLORS1");
+      this.setImage1();
+    }
+    if (this.state.albumNum + 1 === 2) {
+      console.log("COLORS2");
+      this.setImage2();
+    }
+    else if (this.state.albumNum + 1 === 3) {
+      console.log("COLORS3");
+      this.setImage3();
+    }
+    else if (this.state.albumNum + 1 === 4) {
+      console.log("COLORS4");
+      this.setImage4();
+    }
+    else if (this.state.albumNum + 1 === 5) {
+      console.log("COLORS5");
+      this.setImage5();
+    } 
+  }
+
+  
 
 
 
