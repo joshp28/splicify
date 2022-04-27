@@ -133,4 +133,14 @@ hr {
     font-size: 23px;
 }
 
+@supports (filter: invert(1)) and (background-blend-mode: difference) {
+    .pencil-effect {
+        background-size: cover;
+        background-image: url("https://bennettfeely.com/image-effects/css/photo.jpg"), url("https://bennettfeely.com/image-effects/css/photo.jpg");
+        background-blend-mode: difference;
+        background-position: calc(50% - 1px) calc(50% - 1px), calc(50% + 1px) calc(50% + 1px);
+        filter: brightness(1) invert(1) grayscale(1);
+    }
+}
+
 
