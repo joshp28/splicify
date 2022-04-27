@@ -201,10 +201,37 @@ class Guesser extends Component {
       artists += " IS ";
     }
     for (var i = 0; i < artistLength; i++) {
-      if (i > 0) {
-        artists += " AND ";
+      // if (i > 0) {
+        
+      // }
+      if (artsitArray[i] === ",") {
+        console.log("PARSE");
+        if (artsitArray[i+1] === " " && artsitArray[i+2] === "]") {
+          // console.log("PARSE123");
+          // console.log(artsitArray[i+1]);
+          // console.log("PARSE456");
+          // console.log(artsitArray[i+2]);
+          continue;
+        }
+        
+        else {
+          artists += " AND";
+        }
       }
-      artists += artsitArray[i];
+      else if (artsitArray[i] === "[") {
+        continue;
+      }
+      else if (artsitArray[i] === "]") {
+        continue;
+      }
+      else if (artsitArray[i] === '"') {
+        artists += artsitArray[i];
+      }
+      else {
+        artists += artsitArray[i];
+      }
+      
+      console.log(artists);
 
     }
     return artists.toUpperCase();
