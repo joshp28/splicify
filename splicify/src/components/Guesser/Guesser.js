@@ -201,16 +201,9 @@ class Guesser extends Component {
       artists += " IS ";
     }
     for (var i = 0; i < artistLength; i++) {
-      // if (i > 0) {
-        
-      // }
       if (artsitArray[i] === ",") {
         console.log("PARSE");
         if (artsitArray[i+1] === " " && artsitArray[i+2] === "]") {
-          // console.log("PARSE123");
-          // console.log(artsitArray[i+1]);
-          // console.log("PARSE456");
-          // console.log(artsitArray[i+2]);
           continue;
         }
         
@@ -241,6 +234,8 @@ class Guesser extends Component {
     if (this.state.hints == 0) {
       document.getElementById('artistHint').style.display = '';
       document.getElementById('hintButton').style.display = 'none';
+      var button = document.getElementById('hintButton');
+      button.innerText = button.textContent = 'Hint 2';
       this.setState({ hints: 1 });
     }
     else {
@@ -258,6 +253,8 @@ class Guesser extends Component {
     document.getElementById('next').style.display = 'none'
     document.getElementById('artistHint').style.display = 'none';
     document.getElementById('hintButton').style.display = 'none';
+    var button = document.getElementById('hintButton');
+      button.innerText = button.textContent = 'Hint 1';
 
     return;
   }
@@ -330,19 +327,6 @@ class Guesser extends Component {
 
   render() {
 
-    // We can replace with answers
-    // var top100Songs = [
-    //   { song_title: 'The Shawshank Redemption', year: 1994 },
-    //   { song_title: 'The Godfather', year: 1972 },
-    //   { song_title: 'The Godfather: Part II', year: 1974 },
-    //   { song_title: 'The Dark Knight', year: 2008 },
-    //   { song_title: '12 Angry Men', year: 1957 },
-    //   { song_title: "Schindler's List", year: 1993 },
-    //   { song_title: 'Pulp Fiction', year: 1994 },
-    //   { song_title: 'The Lord of the Rings: The Return of the King', year: 2003}
-    // ];
-
-    // console.log(top100Songs);
     const{loaded} = this.state;
 
     return (
@@ -357,7 +341,7 @@ class Guesser extends Component {
           <canvas className="canvas" ref='canvas' id="canvas" width={300} height={300}></canvas>
           <div className='textbox' id='guesser' >
             {/* <input autoComplete="off" type="text" id="input" onChange={this.saveInput} /> */}
-            <Button id='hintButton' onClick={() => { this.getHint() }}>HINT</Button>
+            <Button id='hintButton' onClick={() => { this.getHint() }}>HINT 1</Button>
 
             <Autocomplete
               id="highlights-demo"
