@@ -76,16 +76,60 @@ class Results extends Component {
     image5.src = mydata.songs[4].image_url;
   }
 
+  shareImage() {
+    canvas.toBlob(blob => {
+      navigator.clipboard.write([
+        new ClipboardItem({
+          [blob.type]: blob
+          
+        })
+      ]).then(() => {
+        // navigator.clipboard.writeText("HELLO WORLD");
+        console.log('Copied');
+        alert("Image copied to clipboard!");
+      })
+      })
+
+  }
+
+  // shareImage() {
+  //   canvas.toBlob(blob => {
+  //     const ta = document.createElement('textarea');
+  //     ta.value = this.url;
+  //     document.body.appendChild(ta);
+  //     //hide it
+  //     ta.style.padding = 0;
+  //     ta.style.border = 'none';
+  //     ta.style.outline = 'none';
+  //     ta.style.boxShadow = 'none';
+  //     //select the text
+  //     ta.focus();
+  //     ta.select();
+  //     document.execCommand('copy');
+  //     document.body.removeChild(ta);
+      
+  //     navigator.clipboard.write([
+  //       new ClipboardItem({
+  //         [blob.type]: blob
+          
+  //       })
+  //     ]).then(() => {
+  //       // navigator.clipboard.writeText("HELLO WORLD");
+  //       console.log('Copied')
+  //       alert("Image Copied!");
+  //     })
+  //   })
+  // }
 
   downloadImage() {   
     canvas.toBlob(function(blob) {
       let URLObj = window.URL || window.webkitURL;
-        let a = document.createElement("a");  
-        a.href = URLObj.createObjectURL(blob);
-        a.download = "untitled.png";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+      let a = document.createElement("a");  
+      a.href = URLObj.createObjectURL(blob);
+      a.download = "splicify.png";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     });
   
   }
@@ -110,6 +154,13 @@ class Results extends Component {
             }}
             variant="contained" id='downloadBtn' onClick={() => { this.downloadImage() }}>
             Download
+          </Button>
+
+          <Button style={{
+            backgroundColor: "black",
+            }}
+            variant="contained" id='shareBtn' onClick={() => { this.shareImage() }}>
+            Share
           </Button>
         </div>
         
