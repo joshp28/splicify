@@ -89,6 +89,12 @@ hr {
     align-content: center;
 }
 
+#downloadBtn {
+    height: 80px;
+    width: 90px;
+    border-radius: 50%;
+}
+
 
 
 
