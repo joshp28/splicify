@@ -53,12 +53,17 @@ let cssfilter;
 
 
 var image1 = new Image();
+image1.crossOrigin = "anonymous";
 var image2 = new Image();
+image2.crossOrigin = "anonymous";
 var image3 = new Image();
+image3.crossOrigin = "anonymous";
 var image4 = new Image();
+image4.crossOrigin = "anonymous";
 var image5 = new Image();
+image5.crossOrigin = "anonymous";
 
-
+var resultsFlag = false; 
 class Guesser extends Component {
   
   componentDidMount() {
@@ -234,9 +239,12 @@ class Guesser extends Component {
 
     return;
   }
-
+  
   getResults = () => {
-
+    resultsFlag = true;
+    console.log("RESULTTT PIC");
+    this.setImageResults();
+    
     document.getElementById('passed').style.display = 'none';
     document.getElementById('failed').style.display = 'none';
     this.setState({ results: true });
@@ -263,7 +271,7 @@ class Guesser extends Component {
   setImage1() {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-    
+    image1.src = mydata.songs[0].image_url;
     image1.onload = function () {
       cssfilter = "brightness(1)" 
       ctx.filter = cssfilter;
@@ -303,7 +311,7 @@ class Guesser extends Component {
   setImage2() {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-
+    image1.src = mydata.songs[0].image_url;
     image1.onload = function () {
       cssfilter = "grayscale(1)" 
       ctx.filter = cssfilter;
@@ -345,7 +353,7 @@ class Guesser extends Component {
   setImage3() {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-
+    image1.src = mydata.songs[0].image_url;
     image1.onload = function () {
       cssfilter = "grayscale(1)" 
       ctx.filter = cssfilter;
@@ -388,7 +396,7 @@ class Guesser extends Component {
   setImage4() {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-
+    image1.src = mydata.songs[0].image_url;
     image1.onload = function () {
       cssfilter = "grayscale(1)" 
       ctx.filter = cssfilter;
@@ -429,7 +437,7 @@ class Guesser extends Component {
   setImage5() {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
-
+    image1.src = mydata.songs[0].image_url;
     image1.onload = function () {
       cssfilter = "grayscale(1)" 
       ctx.filter = cssfilter;
@@ -467,31 +475,71 @@ class Guesser extends Component {
 
   }
 
+  setImageResults() {
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    console.log("RESULT PIC");
+
+    image1.src = mydata.songs[0].image_url;
+    image1.onload = function () {
+      cssfilter = "brightness(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image1, (image1.width / 2) - 50, 0, 100, 500, 0, 0, 60, 300);            
+    }
+
+    image2.src = mydata.songs[1].image_url;
+    image2.onload = function () {
+      cssfilter = "brightness(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image2, (image2.width / 2) - 50, 10, 100, 500, 60, 0, 60, 300);
+    }
+
+    image3.src = mydata.songs[2].image_url;
+    image3.onload = function () {
+      cssfilter = "brightness(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image3, (image3.width / 2) - 50, 0, 100, 500, 120, 0, 60, 300);
+    }
+
+    image4.src = mydata.songs[3].image_url;
+    image4.onload = function () {
+      cssfilter = "brightness(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image4, (image4.width / 2) - 50, 0, 100, 500, 180, 0, 60, 300);
+    }
+
+    image5.src = mydata.songs[4].image_url;
+    image5.onload = function () {
+      cssfilter = "brightness(1)" 
+      ctx.filter = cssfilter;
+      ctx.drawImage(image5, (image5.width / 2) - 50, 0, 100, 500, 240, 0, 60, 300);
+    
+    }
+
+  }
+
+
   cropImg() {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
 
     image1.src = mydata.songs[0].image_url;
     if (this.state.albumNum + 1 == 1) {
-      console.log("COLORS1");
       this.setImage1();
     }
     if (this.state.albumNum + 1 === 2) {
-      console.log("COLORS2");
       this.setImage2();
     }
     else if (this.state.albumNum + 1 === 3) {
-      console.log("COLORS3");
       this.setImage3();
     }
     else if (this.state.albumNum + 1 === 4) {
-      console.log("COLORS4");
       this.setImage4();
     }
     else if (this.state.albumNum + 1 === 5) {
-      console.log("COLORS5");
       this.setImage5();
     } 
+    
   }
 
   
@@ -501,6 +549,7 @@ class Guesser extends Component {
   render() {
 
     const{loaded} = this.state;
+    
 
     return (
       <div className="Home" >
@@ -520,7 +569,7 @@ class Guesser extends Component {
               id="highlights-demo"
               freeSolo
               autoSelect
-              sx={{ width: 600, margin: 'auto' }}
+              sx={{ width: 600, margin: 'auto'}}
               options={top100Songs.map((option) => option.song_title)}
               onChange={(event, v) => autoInput = v}
               renderInput={(params) => (
