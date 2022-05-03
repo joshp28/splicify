@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
+import React, { Component, useState } from "react";
 import './Guesser.css';
 import cover from '../../images/boypablo-feelinglonely.jpg';
 
@@ -15,6 +16,12 @@ import Results from '../Results/Results.js';
 import Button from '@mui/material/Button';
 
 import loaded from "../../spotify_info.json";
+
+import mute from '../../images/mute_play.svg';
+// import mute from '../../images/Mute.svg';
+import audioBtn from '../../images/Audio.svg';
+import { Link } from 'react-router-dom';
+import { stepIconClasses } from "@mui/material";
 
 
 
@@ -63,10 +70,27 @@ image4.crossOrigin = "anonymous";
 var image5 = new Image();
 image5.crossOrigin = "anonymous";
 
-var resultsFlag = false; 
+var isPlaying = false;
+var playing = false;
+
+
+
+var audio;
 class Guesser extends Component {
+  state = {
+    tries: 0,
+    results: false,
+    correct: 0,
+    answers: [],
+    loaded,
+    audio: new Audio(mydata.songs[0].preview_url),
+    isPlaying,
+    albumNum: 0,
+    hints: 0
+  };
   
   componentDidMount() {
+    
     console.log("MOUNT");
     this.cropImg();
     document.getElementById('failed').style.display = 'none'
@@ -76,39 +100,88 @@ class Guesser extends Component {
     document.getElementById('artistHint').style.display = 'none';
     document.getElementById('hintButton').style.display = 'none';
     document.getElementById('getResults').style.display = 'none';
-    // document.getElementById('results').style.display = 'none';
-    
     return;
   }
 
-  state = {
-    tries: 0,
-    results: false,
-    correct: 0,
-    answers: [],
-    loaded,
-    albumNum: 0,
-    hints: 0
-  };
+  
 
+  playPause = () => {
+    // let { answers, input, loaded, audio, isPlaying, albumNum, tries, correct } = this.state;
+    // this.state.audio = new Audio(mydata.songs[this.state.albumNum].preview_url);
+    // Get state of song
+    
+
+    let play = this.state.isPlaying;
+    console.log(play);
+    const btn = document.getElementById("playBtn");
+
+    this.state.audio.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.play();
+      // btn.innerText = "Mute";
+    }, false);
+    
+    if (play) {
+      // Pause the song if it is playing
+      // btn.innerText = "PLAY";
+      // btn.setImageResults = audioBtn;
+
+      this.state.audio.muted = true;
+      document.getElementById("mute").src = mute;
+      console.log("MUUUUTEEE");
+     
+      // this.state.audio = new Audio(mydata.songs[this.state.albumNum].preview_url);
+      
+      // this.setState({ isPlaying: !isPlaying });
+    } else {
+
+      // Play the song if it is muted
+      this.state.audio.muted = false;
+      // btn.innerText = "MUTE";
+      document.getElementById("mute").src = audioBtn;
+      this.state.audio.play();
+      
+      console.log("PLAYYY");
+      
+      this.setState({ isPlaying: !isPlaying });
+    }
+    this.state.isPlaying = false;
+  };
+  
+  
   setPlay(albumNum) {
-    var audio = new Audio(mydata.songs[albumNum].preview_url);
-    audio.pause();
-    audio.currentTime = 0;
-    audio.play();
-    setTimeout(function () {
+    
+    const btn = document.getElementById("playBtn");
+    console.log(playing);
+
+    audio.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.play();
+    }, false);
+
+    if (playing === false) {
+      audio.play();
+      playing = true;
+      btn.innerText = "PAUSE";
+      console.log("play");
+    }
+    else if (playing === true) {
+      audio.muted = true;
+      playing = false;
       audio.pause();
-      audio.currentTime = 0;
-    }, 5000);
+      console.log("pausedddd");
+    }
+    
   }
 
+  
   saveInput = (e) => {
     this.setState({ input: e.target.value });
     return;
   };
 
   addNewItem = () => {
-    let { answers, input, loaded, albumNum, tries, correct } = this.state;
+    let { answers, input, loaded, audio, isPlaying, albumNum, tries, correct } = this.state;
     console.log("ADDNEWITEM");
     this.cropImg();
 
@@ -224,6 +297,10 @@ class Guesser extends Component {
     this.input = null;
     this.hints = 0;
     this.tries = 0;
+    this.state.audio.pause();
+    this.state.audio = new Audio(mydata.songs[this.state.albumNum].preview_url);
+    this.playPause();
+    
     this.setState({ hints: 0, input: null, albumNum: this.state.albumNum, tries: 0 });
     
     document.getElementById('guesser').style.display = '';
@@ -546,9 +623,8 @@ class Guesser extends Component {
 
 
 
-  render() {
-
-    const{loaded} = this.state;
+  render() {   
+    
     
 
     return (
@@ -601,6 +677,9 @@ class Guesser extends Component {
           </Button>
           <Button variant="contained" id='getResults' onClick={() => { this.getResults() }}>
             Results
+          </Button>
+          <Button id='playBtn' component={Link} to="/guesser/" onClick={() => { this.playPause();}}>
+            <img src = {mute} id = "mute"/>
           </Button>
           {/* <button onClick={() => { this.nextAlbum() }} id='next'> Next </button> */}
         </div>
