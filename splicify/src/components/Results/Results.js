@@ -91,36 +91,7 @@ class Results extends Component {
       })
 
   }
-
-  // shareImage() {
-  //   canvas.toBlob(blob => {
-  //     const ta = document.createElement('textarea');
-  //     ta.value = this.url;
-  //     document.body.appendChild(ta);
-  //     //hide it
-  //     ta.style.padding = 0;
-  //     ta.style.border = 'none';
-  //     ta.style.outline = 'none';
-  //     ta.style.boxShadow = 'none';
-  //     //select the text
-  //     ta.focus();
-  //     ta.select();
-  //     document.execCommand('copy');
-  //     document.body.removeChild(ta);
-      
-  //     navigator.clipboard.write([
-  //       new ClipboardItem({
-  //         [blob.type]: blob
-          
-  //       })
-  //     ]).then(() => {
-  //       // navigator.clipboard.writeText("HELLO WORLD");
-  //       console.log('Copied')
-  //       alert("Image Copied!");
-  //     })
-  //   })
-  // }
-
+  
   downloadImage() {   
     canvas.toBlob(function(blob) {
       let URLObj = window.URL || window.webkitURL;
