@@ -7,8 +7,6 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Controller, useForm } from "react-hook-form";
 
-import parse from 'autosuggest-highlight/parse';
-import match from 'autosuggest-highlight/match';
 import Box from '@mui/material/Box';
 
 import Results from '../Results/Results.js';
@@ -18,43 +16,20 @@ import Button from '@mui/material/Button';
 import loaded from "../../spotify_info.json";
 
 import mute from '../../images/mute_play.svg';
-// import mute from '../../images/Mute.svg';
 import audioBtn from '../../images/Audio.svg';
 import { Link } from 'react-router-dom';
+// import { browserHistory } from 'react-router-dom';
 import { stepIconClasses } from "@mui/material";
 
 
-
-
-
-// const handlePlay = () => setPlay(true);
-
-// var audio = new Audio("https://p.scdn.co/mp3-preview/8553a21392d68592e6884a15f28909a499663b1c?cid=1065d1fc90714ae18996972cb4abd133");
 var data = loaded;
 var mydata = JSON.parse(data);
 var copyData = JSON.parse(data);
 
-// console.log("TOP");
-// const top100Songs = mydata.songs;
 const top100Songs = copyData.songs.sort(() => Math.random() - 0.5);
-// var mydata = JSON.parse(data);.sort( () => Math.random() - 0.5) );
 
 
 var autoInput = "";
-
-// function setPlay(){
-//   console.log("HEREEEE");
-//   console.log(mydata[albumNum]);
-//   var audio = new Audio("https://p.scdn.co/mp3-preview/8553a21392d68592e6884a15f28909a499663b1c?cid=1065d1fc90714ae18996972cb4abd133");
-//   audio.pause();
-//   audio.currentTime = 0;
-//   audio.play();
-//   setTimeout(function() {
-//       audio.pause();
-//       audio.currentTime = 0;
-//   }, 5000);
-// }
-
 
 let cssfilter;
 
@@ -72,6 +47,7 @@ image5.crossOrigin = "anonymous";
 
 var isPlaying = false;
 var playing = false;
+var resultsFlag;
 
 
 
@@ -90,7 +66,6 @@ class Guesser extends Component {
   };
   
   componentDidMount() {
-    
     console.log("MOUNT");
     this.cropImg();
     document.getElementById('failed').style.display = 'none'
@@ -299,7 +274,9 @@ class Guesser extends Component {
     this.tries = 0;
     this.state.audio.pause();
     this.state.audio = new Audio(mydata.songs[this.state.albumNum].preview_url);
-    this.playPause();
+    document.getElementById("mute").src = mute;
+
+    // this.playPause();
     
     this.setState({ hints: 0, input: null, albumNum: this.state.albumNum, tries: 0 });
     
@@ -620,10 +597,17 @@ class Guesser extends Component {
   }
 
   
-
+  handleHome = () => {
+    // browserHistory.push('/');
+    document.getElementById("spliceHome").addEventListener('click', function(){
+      console.log('h1 has been clicked');
+    });
+    
+  }
 
 
   render() {   
+    
     
     
 
@@ -631,7 +615,12 @@ class Guesser extends Component {
       <div className="Home" >
         <div className='vl' />
         <h1 className='scoreheader'>SCORE: {this.state.correct}/5</h1>
-        <h1>{"SPLICIFY"}</h1>
+        {/* <h1 id="spliceHome" component={Link} to="/">{"SPLICIFY"}</h1> */}
+        <h1 id="spliceHome" component={Link} to="/">
+          <Link to="/" id="spliceHomeLink">SPLICIFY</Link>
+        </h1>
+        
+        
         <hr className="block" />
         <div id='guesserblock'>
           <h2>DO YOU KNOW WHAT SONG SPLICE {this.state.albumNum + 1} IS?</h2>
@@ -678,7 +667,10 @@ class Guesser extends Component {
           <Button variant="contained" id='getResults' onClick={() => { this.getResults() }}>
             Results
           </Button>
-          <Button id='playBtn' component={Link} to="/guesser/" onClick={() => { this.playPause();}}>
+          {/* <Button id='playBtn' component={Link} to="/guesser/" onClick={() => { this.playPause();}}>
+            <img src = {mute} id = "mute"/>
+          </Button> */}
+          <Button id='playBtn' onClick={() => { this.playPause();}}>
             <img src = {mute} id = "mute"/>
           </Button>
           {/* <button onClick={() => { this.nextAlbum() }} id='next'> Next </button> */}
