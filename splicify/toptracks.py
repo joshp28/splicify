@@ -69,16 +69,20 @@ def get_current_track(access_token):
     response = ''
     songs = []
     current_song = {}
+
     for i in song_list:
-        # print(i)
-        artist_names = '['
-        for x in i['artists']:
-            artist_names += '"'
+        artist_names = ''
+        
+        for idx, x in enumerate(i['artists']):
+            # artist_names += '"'
             artist_names += x['name']
-            artist_names += '", '
+            # artist_names += '" '
+            print("\n       iNDEXXXXX:" + str(len(i['artists'])) + " end\n" + "\n\nHEREEEEEEOOOOO\n\n")
+            if (idx < len(i['artists']) - 1):
+                artist_names += ' and '
         # print(artist_names)
         artist_names.replace(', ', '')
-        artist_names += ']'
+        # artist_names += ']'
         # response += '{\nsong title: ' + i['name'] + '\nsong artist: ' + i['artists'][0]['name'] + '\nimage url: ' + i['album']['images'][0]['url'] + '\n}\n'
         response += "{ song_title: " + i['name'] + " song_artist: " + artist_names + " image_url: " + i['album']['images'][0]['url'] + " "
         if i['preview_url'] != None:

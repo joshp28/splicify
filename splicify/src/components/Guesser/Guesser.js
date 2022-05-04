@@ -66,7 +66,6 @@ class Guesser extends Component {
   };
   
   componentDidMount() {
-    console.log("MOUNT");
     this.cropImg();
     document.getElementById('failed').style.display = 'none'
     document.getElementById('passed').style.display = 'none'
@@ -82,9 +81,7 @@ class Guesser extends Component {
 
   playPause = () => {
     // let { answers, input, loaded, audio, isPlaying, albumNum, tries, correct } = this.state;
-    // this.state.audio = new Audio(mydata.songs[this.state.albumNum].preview_url);
-    // Get state of song
-    
+    // Get state of song    
 
     let play = this.state.isPlaying;
     console.log(play);
@@ -93,31 +90,18 @@ class Guesser extends Component {
     this.state.audio.addEventListener('ended', function() {
       this.currentTime = 0;
       this.play();
-      // btn.innerText = "Mute";
     }, false);
     
     if (play) {
       // Pause the song if it is playing
-      // btn.innerText = "PLAY";
-      // btn.setImageResults = audioBtn;
-
       this.state.audio.muted = true;
       document.getElementById("mute").src = mute;
-      console.log("MUUUUTEEE");
-     
-      // this.state.audio = new Audio(mydata.songs[this.state.albumNum].preview_url);
-      
-      // this.setState({ isPlaying: !isPlaying });
     } else {
 
       // Play the song if it is muted
       this.state.audio.muted = false;
-      // btn.innerText = "MUTE";
       document.getElementById("mute").src = audioBtn;
-      this.state.audio.play();
-      
-      console.log("PLAYYY");
-      
+      this.state.audio.play();      
       this.setState({ isPlaying: !isPlaying });
     }
     this.state.isPlaying = false;
@@ -162,16 +146,20 @@ class Guesser extends Component {
 
     // guess three times and activate hints on each wrong submission
     // guess it right
-    if (input != null && input.toLowerCase() === mydata.songs[albumNum].song_title.toLowerCase()) {
+    if (input != null && input.toLowerCase() === mydata.songs[albumNum].song_artist.toLowerCase()) {
+    // if (input != null && input.toLowerCase() === this.getArtists().toLowerCase()) {
+      
       answers.push("Correct");
-      // console.log(input);
+      // console.log(mydata.songs[albumNum].song_artist.toLowerCase());
+      console.log(input);
       this.setState({ correct: correct + 1 });
       document.getElementById('passed').style.display = '';
       document.getElementById('guesser').style.display = 'none';
       document.getElementById('next').style.display = '';
-      // console.log(spotify[albumNum].song_title);
+      // console.log(spotify[albumNum].song_title);getArtists
     }
-    else if (autoInput != null && autoInput.toLowerCase() === mydata.songs[albumNum].song_title.toLowerCase()) {
+    else if (autoInput != null && autoInput.toLowerCase() === mydata.songs[albumNum].song_artist.toLowerCase()) {
+    // else if (autoInput != null && autoInput.toLowerCase() === getArtists().toLowerCase()) {
 
       // console.log(autoInput);
       // console.log(spotify[albumNum].song_title);
@@ -180,6 +168,8 @@ class Guesser extends Component {
 
 
       answers.push("Correct");
+      console.log(mydata.songs[albumNum].song_artist.toLowerCase());
+      // console.log(answers);
       this.setState({ correct: correct + 1 });
       document.getElementById('passed').style.display = '';
       document.getElementById('guesser').style.display = 'none';
@@ -191,6 +181,7 @@ class Guesser extends Component {
     // guess it wrong
     else if (tries == 2) {
       answers.push("Incorrect");
+      console.log(mydata.songs[albumNum].song_artist.toLowerCase());
       document.getElementById('failed').style.display = '';
       document.getElementById('guesser').style.display = 'none';
       document.getElementById('next').style.display = '';
@@ -200,6 +191,7 @@ class Guesser extends Component {
     else {
       this.setState({ input: null, tries: tries + 1 });
       document.getElementById('hintButton').style.display = '';
+      console.log(mydata.songs[albumNum].song_artist.toLowerCase());
 
     }
 
@@ -214,16 +206,10 @@ class Guesser extends Component {
     return;
   };
 
-  getArtists = () => {
+  getArtists = (currAlbumNum) => {
     var artists = "";
     let artsitArray = mydata.songs[this.state.albumNum].song_artist;
     let artistLength = mydata.songs[this.state.albumNum].song_artist.length;
-    if (artistLength > 1) {
-      artists += "S ARE ";
-    }
-    else {
-      artists += " IS ";
-    }
     for (var i = 0; i < artistLength; i++) {
       if (artsitArray[i] === ",") {
         if (artsitArray[i+1] === " " && artsitArray[i+2] === "]") {
@@ -247,11 +233,85 @@ class Guesser extends Component {
         artists += artsitArray[i];
       }
       
-      // console.log(artists);
+      console.log(artists);
 
     }
     return artists.toUpperCase();
   }
+
+  parseGetArtists = (songTitle) => {
+    // var artists = "A";
+
+    let artsitArray = mydata.songs[this.state.albumNum].song_artist;
+    let artistLength = mydata.songs[this.state.albumNum].song_artist.length;
+    console.log("PARSING ARTSIT");
+    // for (var i = 0; i < artistLength; i++) {
+    //   if (artsitArray[i] === ",") {
+    //     if (artsitArray[i+1] === " " && artsitArray[i+2] === "]") {
+    //       continue;
+    //     }
+        
+    //     else {
+    //       artists += " AND";
+    //     }
+    //   }
+    //   else if (artsitArray[i] === "[") {
+    //     continue;
+    //   }
+    //   else if (artsitArray[i] === "]") {
+    //     continue;
+    //   }
+    //   else if (artsitArray[i] === '"') {
+    //     artists += artsitArray[i];
+    //   }
+    //   else {
+    //     artists += artsitArray[i];
+    //   }
+      
+    //   console.log(artists);
+
+    // }
+    return artsitArray.toUpperCase();
+  }
+
+  // getArtists = () => {
+  //   var artists = "";
+  //   let artsitArray = mydata.songs[this.state.albumNum].song_artist;
+  //   let artistLength = mydata.songs[this.state.albumNum].song_artist.length;
+  //   if (artistLength > 1) {
+  //     artists += "S ARE ";
+  //   }
+  //   else {
+  //     artists += " IS ";
+  //   }
+  //   for (var i = 0; i < artistLength; i++) {
+  //     if (artsitArray[i] === ",") {
+  //       if (artsitArray[i+1] === " " && artsitArray[i+2] === "]") {
+  //         continue;
+  //       }
+        
+  //       else {
+  //         artists += " AND";
+  //       }
+  //     }
+  //     else if (artsitArray[i] === "[") {
+  //       continue;
+  //     }
+  //     else if (artsitArray[i] === "]") {
+  //       continue;
+  //     }
+  //     else if (artsitArray[i] === '"') {
+  //       artists += artsitArray[i];
+  //     }
+  //     else {
+  //       artists += artsitArray[i];
+  //     }
+      
+  //     // console.log(artists);
+
+  //   }
+  //   return artists.toUpperCase();
+  // }
 
   getHint = () => {
     if (this.state.hints == 0) {
@@ -286,7 +346,6 @@ class Guesser extends Component {
     document.getElementById('next').style.display = 'none'
     document.getElementById('artistHint').style.display = 'none';
     document.getElementById('hintButton').style.display = 'none';
-    console.log("NEXTALB");
     this.cropImg();
     var button = document.getElementById('hintButton');
       button.innerText = button.textContent = 'Hint 1';
@@ -296,15 +355,11 @@ class Guesser extends Component {
   
   getResults = () => {
     resultsFlag = true;
-    console.log("RESULTTT PIC");
     this.setImageResults();
-    
     document.getElementById('passed').style.display = 'none';
     document.getElementById('failed').style.display = 'none';
     this.setState({ results: true });
     document.getElementById('guesserblock').style.display = 'none';
-
-
     return;
   }
 
@@ -623,7 +678,7 @@ class Guesser extends Component {
         
         <hr className="block" />
         <div id='guesserblock'>
-          <h2>DO YOU KNOW WHAT SONG SPLICE {this.state.albumNum + 1} IS?</h2>
+          <h2>DO YOU KNOW WHAT WHO WROTE SPLICE {this.state.albumNum + 1}?</h2>
           <h2 id='artistHint'>HINT: THE ARTIST{this.getArtists()}</h2>
           <canvas className="canvas" ref='canvas' id="canvas" width={300} height={300}></canvas>
           <div className='textbox' id='guesser' >
@@ -635,7 +690,8 @@ class Guesser extends Component {
               freeSolo
               autoSelect
               sx={{ width: 600, margin: 'auto'}}
-              options={top100Songs.map((option) => option.song_title)}
+              // options={top100Songs.map((option) => this.parseGetArtists(option.song_artist))}
+              options={top100Songs.map((option) => option.song_artist)}
               onChange={(event, v) => autoInput = v}
               renderInput={(params) => (
                 <div id="container">
@@ -646,7 +702,7 @@ class Guesser extends Component {
                     }}
                   >
 
-                    <TextField id="input"  {...params} sx={{ position: "center", background: "white", input: { color: 'black' } }} label="Guess your song!" margin="normal" onChange={this.saveInput} />
+                    <TextField id="input"  {...params} sx={{ position: "center", background: "white", input: { color: 'black' } }} label="Guess your artist!" margin="normal" onChange={this.saveInput} />
                   </Box>
                 </div>
 
