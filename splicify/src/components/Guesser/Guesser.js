@@ -18,7 +18,6 @@ import loaded from "../../spotify_info.json";
 import mute from '../../images/mute_play.svg';
 import audioBtn from '../../images/Audio.svg';
 import { Link } from 'react-router-dom';
-// import { browserHistory } from 'react-router-dom';
 import { stepIconClasses } from "@mui/material";
 
 

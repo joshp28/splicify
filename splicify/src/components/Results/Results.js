@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import './Results.css';
 import Button from '@mui/material/Button';
 
+import dwlbtn from '../../images/download.svg';
+
 var data;
 var mydata;
 var answers
@@ -120,11 +122,15 @@ class Results extends Component {
           <h2>{mydata.songs[4].song_title}: {answers[4]}</h2>
         </div>
         <div className='feedback'>
-          <Button style={{
+          {/* <Button style={{
             backgroundColor: "black",
             }}
-            variant="contained" id='downloadBtn' onClick={() => { this.downloadImage() }}>
+            variant="contained" >
             Download
+          </Button> */}
+
+          <Button id='downloadBtn' onClick={() => { this.downloadImage() }}>
+            <img src = {dwlbtn} id = "dwlbtn"/>
           </Button>
 
           <Button style={{

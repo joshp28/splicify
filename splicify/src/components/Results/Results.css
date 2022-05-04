@@ -96,11 +96,21 @@ hr {
 }
 
 #shareBtn {
-    margin-left: 20px;
+    margin-left: 280px;
+    /* margin-right: "auto"; */
+    display: 'flex';
+    justify-content: 'flex-end';
     height: 80px;
     width: 90px;
     border-radius: 50%;
 }
+
+#downloadBtn {
+    margin-left: 230px;
+    /* height: 80px; */
+    /* width: 90px; */
+}
+
 
 
 
