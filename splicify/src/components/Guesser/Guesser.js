@@ -7,18 +7,24 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Controller, useForm } from "react-hook-form";
 
-import Box from '@mui/material/Box';
-
 import Results from '../Results/Results.js';
-
-import Button from '@mui/material/Button';
 
 import loaded from "../../spotify_info.json";
 
 import mute from '../../images/mute_play.svg';
+import close from '../../images/closeModalBtn.svg';
 import audioBtn from '../../images/Audio.svg';
+import infoBtn from '../../images/infoBtn.svg';
 import { Link } from 'react-router-dom';
 import { stepIconClasses } from "@mui/material";
+
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+// import Modal from '@mui/material/Modal';
+
+import Modal from '../Modal/Modal.js';
+
 
 
 var data = loaded;
@@ -45,12 +51,22 @@ var image5 = new Image();
 image5.crossOrigin = "anonymous";
 
 var isPlaying = false;
-var playing = false;
 var resultsFlag;
 
+const style = {
+  position: 'relative',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 
-var audio;
+
 class Guesser extends Component {
   state = {
     tries: 0,
@@ -61,7 +77,8 @@ class Guesser extends Component {
     audio: new Audio(mydata.songs[0].preview_url),
     isPlaying,
     albumNum: 0,
-    hints: 0
+    hints: 0,
+    show: false
   };
   
   componentDidMount() {
@@ -74,16 +91,12 @@ class Guesser extends Component {
     document.getElementById('hintButton').style.display = 'none';
     document.getElementById('getResults').style.display = 'none';
     return;
-  }
-
-  
+  }  
 
   playPause = () => {
-    // let { answers, input, loaded, audio, isPlaying, albumNum, tries, correct } = this.state;
     // Get state of song    
-
     let play = this.state.isPlaying;
-    console.log(play);
+    // console.log(play);
     const btn = document.getElementById("playBtn");
 
     this.state.audio.addEventListener('ended', function() {
@@ -96,7 +109,6 @@ class Guesser extends Component {
       this.state.audio.muted = true;
       document.getElementById("mute").src = mute;
     } else {
-
       // Play the song if it is muted
       this.state.audio.muted = false;
       document.getElementById("mute").src = audioBtn;
@@ -105,34 +117,7 @@ class Guesser extends Component {
     }
     this.state.isPlaying = false;
   };
-  
-  
-  setPlay(albumNum) {
     
-    const btn = document.getElementById("playBtn");
-    console.log(playing);
-
-    audio.addEventListener('ended', function() {
-      this.currentTime = 0;
-      this.play();
-    }, false);
-
-    if (playing === false) {
-      audio.play();
-      playing = true;
-      btn.innerText = "PAUSE";
-      console.log("play");
-    }
-    else if (playing === true) {
-      audio.muted = true;
-      playing = false;
-      audio.pause();
-      console.log("pausedddd");
-    }
-    
-  }
-
-  
   saveInput = (e) => {
     this.setState({ input: e.target.value });
     return;
@@ -140,7 +125,7 @@ class Guesser extends Component {
 
   addNewItem = () => {
     let { answers, input, loaded, audio, isPlaying, albumNum, tries, correct } = this.state;
-    console.log("ADDNEWITEM");
+    // console.log("ADDNEWITEM");
     this.cropImg();
 
     // guess three times and activate hints on each wrong submission
@@ -150,7 +135,7 @@ class Guesser extends Component {
       
       answers.push("Correct");
       // console.log(mydata.songs[albumNum].song_artist.toLowerCase());
-      console.log(input);
+      // console.log(input);
       this.setState({ correct: correct + 1 });
       document.getElementById('passed').style.display = '';
       document.getElementById('guesser').style.display = 'none';
@@ -158,29 +143,18 @@ class Guesser extends Component {
       // console.log(spotify[albumNum].song_title);getArtists
     }
     else if (autoInput != null && autoInput.toLowerCase() === mydata.songs[albumNum].song_artist.toLowerCase()) {
-    // else if (autoInput != null && autoInput.toLowerCase() === getArtists().toLowerCase()) {
-
-      // console.log(autoInput);
-      // console.log(spotify[albumNum].song_title);
-      // console.log(albumNum);
-      // this.setState({ albumNum: this.state.albumNum + 1, tries: 0 });
-
-
       answers.push("Correct");
-      console.log(mydata.songs[albumNum].song_artist.toLowerCase());
+      // console.log(mydata.songs[albumNum].song_artist.toLowerCase());
       // console.log(answers);
       this.setState({ correct: correct + 1 });
       document.getElementById('passed').style.display = '';
       document.getElementById('guesser').style.display = 'none';
       document.getElementById('next').style.display = '';
-
-
-
     }
     // guess it wrong
     else if (tries == 2) {
       answers.push("Incorrect");
-      console.log(mydata.songs[albumNum].song_artist.toLowerCase());
+      // console.log(mydata.songs[albumNum].song_artist.toLowerCase());
       document.getElementById('failed').style.display = '';
       document.getElementById('guesser').style.display = 'none';
       document.getElementById('next').style.display = '';
@@ -190,7 +164,7 @@ class Guesser extends Component {
     else {
       this.setState({ input: null, tries: tries + 1 });
       document.getElementById('hintButton').style.display = '';
-      console.log(mydata.songs[albumNum].song_artist.toLowerCase());
+      // console.log(mydata.songs[albumNum].song_artist.toLowerCase());
 
     }
 
@@ -205,7 +179,7 @@ class Guesser extends Component {
     return;
   };
 
-  getArtists = (currAlbumNum) => {
+  getArtists = () => {
     var artists = "";
     let artsitArray = mydata.songs[this.state.albumNum].song_artist;
     let artistLength = mydata.songs[this.state.albumNum].song_artist.length;
@@ -232,85 +206,18 @@ class Guesser extends Component {
         artists += artsitArray[i];
       }
       
-      console.log(artists);
+      // console.log(artists);
 
     }
     return artists.toUpperCase();
   }
 
   parseGetArtists = (songTitle) => {
-    // var artists = "A";
-
     let artsitArray = mydata.songs[this.state.albumNum].song_artist;
     let artistLength = mydata.songs[this.state.albumNum].song_artist.length;
     console.log("PARSING ARTSIT");
-    // for (var i = 0; i < artistLength; i++) {
-    //   if (artsitArray[i] === ",") {
-    //     if (artsitArray[i+1] === " " && artsitArray[i+2] === "]") {
-    //       continue;
-    //     }
-        
-    //     else {
-    //       artists += " AND";
-    //     }
-    //   }
-    //   else if (artsitArray[i] === "[") {
-    //     continue;
-    //   }
-    //   else if (artsitArray[i] === "]") {
-    //     continue;
-    //   }
-    //   else if (artsitArray[i] === '"') {
-    //     artists += artsitArray[i];
-    //   }
-    //   else {
-    //     artists += artsitArray[i];
-    //   }
-      
-    //   console.log(artists);
-
-    // }
     return artsitArray.toUpperCase();
   }
-
-  // getArtists = () => {
-  //   var artists = "";
-  //   let artsitArray = mydata.songs[this.state.albumNum].song_artist;
-  //   let artistLength = mydata.songs[this.state.albumNum].song_artist.length;
-  //   if (artistLength > 1) {
-  //     artists += "S ARE ";
-  //   }
-  //   else {
-  //     artists += " IS ";
-  //   }
-  //   for (var i = 0; i < artistLength; i++) {
-  //     if (artsitArray[i] === ",") {
-  //       if (artsitArray[i+1] === " " && artsitArray[i+2] === "]") {
-  //         continue;
-  //       }
-        
-  //       else {
-  //         artists += " AND";
-  //       }
-  //     }
-  //     else if (artsitArray[i] === "[") {
-  //       continue;
-  //     }
-  //     else if (artsitArray[i] === "]") {
-  //       continue;
-  //     }
-  //     else if (artsitArray[i] === '"') {
-  //       artists += artsitArray[i];
-  //     }
-  //     else {
-  //       artists += artsitArray[i];
-  //     }
-      
-  //     // console.log(artists);
-
-  //   }
-  //   return artists.toUpperCase();
-  // }
 
   getHint = () => {
     if (this.state.hints == 0) {
@@ -659,6 +566,27 @@ class Guesser extends Component {
     
   }
 
+  handleInfo() {
+    console.log("INFO!");
+    
+    
+     
+  }
+
+  constructor() {
+    super();
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+  }
+
+  showModal = () => {
+    this.setState({ show: true });
+    console.log("MODAL");
+  };
+
+  hideModal = () => {
+    this.setState({ show: false });
+  };
 
   render() {   
     
@@ -666,23 +594,52 @@ class Guesser extends Component {
     
 
     return (
+      
       <div className="Home" >
+        
         <div className='vl' />
         <h1 className='scoreheader'>SCORE: {this.state.correct}/5</h1>
         {/* <h1 id="spliceHome" component={Link} to="/">{"SPLICIFY"}</h1> */}
         <h1 id="spliceHome" component={Link} to="/">
           <Link to="/" id="spliceHomeLink">SPLICIFY</Link>
         </h1>
+        <Button id='infoBtn' onClick={() => { this.showModal() }}>
+          <img src = {infoBtn} id = "info"/>
+        </Button>
+        
+        
         
         
         <hr className="block" />
         <div id='guesserblock'>
+          
+          
+          {/* <Modal
+            open={open}
+            onClose={this.handleClose()}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+              Share this with friends!
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Lorem ipsum...
+              </Typography>
+            </Box>
+          </Modal> */}
           <h2>DO YOU KNOW WHAT WHO WROTE SPLICE {this.state.albumNum + 1}?</h2>
+          <Button id='playBtn' onClick={() => { this.playPause();}}>
+            <img src = {mute} id = "mute"/>
+          </Button>
           <h2 id='artistHint'>HINT: THE ARTIST{this.getArtists()}</h2>
           <canvas className="canvas" ref='canvas' id="canvas" width={300} height={300}></canvas>
           <div className='textbox' id='guesser' >
             {/* <input autoComplete="off" type="text" id="input" onChange={this.saveInput} /> */}
-            <Button id='hintButton' onClick={() => { this.getHint() }}>HINT 1</Button>
+            <Button id='hintButton' onClick={() => { this.getHint() }}>
+              HINT 1
+            </Button>
 
             <Autocomplete
               id="highlights-demo"
@@ -712,22 +669,17 @@ class Guesser extends Component {
             </Button>
             <br />
             <br />
-            {/* <button onClick={() => { this.addNewItem(); document.getElementById('input').value = ''; }}> Submit </button> */}
           </div>
-
           <br />
           <Button variant="contained" id='next' onClick={() => { this.nextAlbum() }}>
             Next
           </Button>
+
           <Button variant="contained" id='getResults' onClick={() => { this.getResults() }}>
             Results
           </Button>
-          {/* <Button id='playBtn' component={Link} to="/guesser/" onClick={() => { this.playPause();}}>
-            <img src = {mute} id = "mute"/>
-          </Button> */}
-          <Button id='playBtn' onClick={() => { this.playPause();}}>
-            <img src = {mute} id = "mute"/>
-          </Button>
+
+          
           {/* <button onClick={() => { this.nextAlbum() }} id='next'> Next </button> */}
         </div>
         {this.state.results && <Results id='results' data={this.state}></Results>}
@@ -735,7 +687,52 @@ class Guesser extends Component {
         <div className='feedback'>
           <div id='failed' >SORRY YOU DIDN'T GET IT</div>
           <div id='passed' >CONGRATS! YOU GOT IT</div>
+          <Modal 
+          show={this.state.show} 
+          handleClose={this.hideModal} 
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description">
+          {/* <p>Modal</p> */}
+
+          <Box id="boxModal" sx={style}>
+            <Button id='playBtn' onClick={() => { this.hideModal()}}>
+              <img src = {close} id = "close"/>
+            </Button>
+            <Typography id="modal-modal-title" variant="h1" component="h6">
+            SPLICIFY
+            </Typography>
+            {/* <br></br> */}
+            <Typography id="modal-modal-description1" sx={{ mt: 2 }}>
+            Splicify is a project for the Creative Computing Studio course at Virginia Tech. 
+
+            
+            </Typography>
+            <Typography id="modal-modal-description2" sx={{ mt: 2}}>
+            Created by: 
+            
+            </Typography>
+
+            <Typography id="modal-modal-description3" sx={{ mt: 2}}>
+              Tyler Esposo 
+            </Typography>
+            <Typography id="modal-modal-description4" sx={{ mt: 2}}>
+              Catherine Lee
+            </Typography>
+            <Typography id="modal-modal-description5" sx={{ mt: 2}}>
+              Josh Protacio 
+            </Typography>
+            <Typography id="modal-modal-description6" sx={{ mt: 2}}>
+              Lily Thai
+            </Typography>
+            
+
+            
+          </Box>
+
+        </Modal>
         </div>
+
+        
 
       </div>
     );

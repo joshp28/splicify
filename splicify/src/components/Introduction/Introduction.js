@@ -79,7 +79,7 @@ function Introduction() {
             <div id='middle'>
                 <hr id='top-line'></hr>
                 <div id='blurb'>
-                     <h3>{"Can you get all top 5 songs of songs correct? Let’s see if you can figure out what songs are on your Splicify. Share with your friends and see if they can guess them right too."}</h3>
+                     <h3 >{"Can you get all top 5 songs of songs correct? Let’s see if you can figure out what songs are on your Splicify. Share with your friends and see if they can guess them right too."}</h3>
                 </div>
 
                 <img src={spliced} id="Home-logo" alt="spliced" />

@@ -124,7 +124,7 @@ hr {
     padding: 2vh;
     position: absolute;
     text-align: right;
-    top: 3vh;
+    top: 2vh;
     right: 15vw;
     font-size: 2.5em;
 }
@@ -147,5 +147,48 @@ hr {
     color: rgb(0, 0, 0);
     text-decoration: none;
 }
+
+#infoBtn {
+    padding: 2vh;
+    position: absolute;
+    text-align: right;
+    top: 3vh;
+    right: 0vw;
+}
+
+#modal-modal-description1 {    
+    text-align: center;
+}
+
+#modal-modal-description2 {
+    text-align: center;
+}
+
+#modal-modal-description3 {
+    text-align: center;
+}
+
+#modal-modal-description4 {
+    text-align: center;
+}
+
+#modal-modal-description5 {
+    text-align: center;
+}
+
+#modal-modal-description6 {
+    text-align: center;
+}
+
+#boxModal {
+    margin-top: 4em;
+    /* background-color: beige; */
+}
+
+/* #playBtn {
+    float: left;
+    padding-left: 5em;
+} */
+
 
 
