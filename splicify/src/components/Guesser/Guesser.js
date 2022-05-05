@@ -262,6 +262,7 @@ class Guesser extends Component {
   getResults = () => {
     resultsFlag = true;
     this.setImageResults();
+    this.state.audio.pause();
     document.getElementById('passed').style.display = 'none';
     document.getElementById('failed').style.display = 'none';
     this.setState({ results: true });
