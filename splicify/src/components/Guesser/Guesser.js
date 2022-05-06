@@ -246,6 +246,7 @@ class Guesser extends Component {
       document.getElementById('albumHint').style.display = '';
       document.getElementById('hintButton').style.display = 'none';
       var button = document.getElementById('hintButton');
+      button.innerText = button.textContent = 'HINT: SONG';
       
     }
     return
