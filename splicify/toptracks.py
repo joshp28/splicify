@@ -77,7 +77,7 @@ def get_current_track(access_token):
             # artist_names += '"'
             artist_names += x['name']
             # artist_names += '" '
-            print("\n       iNDEXXXXX:" + str(len(i['artists'])) + " end\n" + "\n\nHEREEEEEEOOOOO\n\n")
+            # print("\n       iNDEXXXXX:" + str(len(i['artists'])) + " end\n" + "\n\nHEREEEEEEOOOOO\n\n")
             if (idx < len(i['artists']) - 1):
                 artist_names += ' and '
         # print(artist_names)
@@ -94,7 +94,8 @@ def get_current_track(access_token):
             'song_artist': artist_names,
             'album_name': i['album']['name'],
             'image_url': i['album']['images'][0]['url'],
-            'preview_url': i['preview_url']
+            'preview_url': i['preview_url'],
+            'track_url': i['external_urls']['spotify']
 
         }
         

@@ -116,7 +116,8 @@ class Results extends Component {
 
         <canvas className="canvasResults" ref='canvasResults' id="canvasResults" width={500} height={500}></canvas>
         <div id="answers">
-          <h2>{mydata.songs[0].song_title}: {answers[0]}</h2>
+          <h2 hhref={mydata.songs[0].track_url}>{mydata.songs[0].song_title}: {answers[0]}</h2>
+          {/* <a href={mydata.songs[0].track_url}>#1</a> */}
           <h2>{mydata.songs[1].song_title}: {answers[1]}</h2>
           <h2>{mydata.songs[2].song_title}: {answers[2]}</h2>
           <h2>{mydata.songs[3].song_title}: {answers[3]}</h2>
