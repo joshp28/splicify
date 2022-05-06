@@ -99,6 +99,11 @@ class Results extends Component {
       })
 
   }
+
+  replay() {
+    window.location.reload(false);
+
+  }
   
   downloadImage() {   
     canvas.toBlob(function(blob) {
@@ -150,6 +155,15 @@ class Results extends Component {
             variant="contained" id='shareBtn' onClick={() => { this.shareImage() }}>
             Share
           </Button>
+
+          <Button style={{
+            backgroundColor: "black",
+            }}
+            variant="contained" id='replay' onClick={() => { this.replay() }}>
+            Replay
+          </Button>
+
+          
         </div>
         
       </div>
