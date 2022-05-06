@@ -261,6 +261,7 @@ class Guesser extends Component {
 
   nextAlbum = () => {
     this.state.albumNum+=1;
+    this.cropImg();
     this.input = null;
     this.hints = 0;
     this.tries = 0;
