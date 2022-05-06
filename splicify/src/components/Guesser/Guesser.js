@@ -162,7 +162,7 @@ class Guesser extends Component {
       document.getElementById('failed').style.display = '';
       document.getElementById('guesser').style.display = 'none';
       document.getElementById('next').style.display = '';
-      document.getElementById('songtHint').style.display = 'none';
+      document.getElementById('songHint').style.display = 'none';
       document.getElementById('albumHint').style.display = 'none';
       document.getElementById('guesses').style.display = 'none';
     }
@@ -180,7 +180,7 @@ class Guesser extends Component {
       document.getElementById('guesser').style.display = 'none';
       document.getElementById('next').style.display = 'none';
       document.getElementById('getResults').style.display = '';
-     
+      document.getElementById('guesses').style.display = 'none';
     }
 
     return;
