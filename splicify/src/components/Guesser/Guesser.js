@@ -87,7 +87,8 @@ class Guesser extends Component {
     document.getElementById('passed').style.display = 'none'
     document.getElementById('guesser').style.display = ''
     document.getElementById('next').style.display = 'none'
-    document.getElementById('artistHint').style.display = 'none';
+    document.getElementById('songHint').style.display = 'none';
+    document.getElementById('albumHint').style.display = 'none';
     document.getElementById('hintButton').style.display = 'none';
     document.getElementById('getResults').style.display = 'none';
     document.getElementById('guesses').style.display = 'none';
@@ -161,7 +162,8 @@ class Guesser extends Component {
       document.getElementById('failed').style.display = '';
       document.getElementById('guesser').style.display = 'none';
       document.getElementById('next').style.display = '';
-      document.getElementById('artistHint').style.display = 'none';
+      document.getElementById('songtHint').style.display = 'none';
+      document.getElementById('albumHint').style.display = 'none';
       document.getElementById('guesses').style.display = 'none';
     }
     // guess wrong but have more submissions
@@ -224,16 +226,27 @@ class Guesser extends Component {
     return artsitArray.toUpperCase();
   }
 
+  getSongName = () => {
+    return mydata.songs[this.state.albumNum].song_title.toUpperCase();
+  }
+
+  getAlbumName = () => {
+    return mydata.songs[this.state.albumNum].album_name.toUpperCase();
+  }
+
   getHint = () => {
     if (this.state.hints == 0) {
-      document.getElementById('artistHint').style.display = '';
+      document.getElementById('songHint').style.display = '';
       document.getElementById('hintButton').style.display = 'none';
       var button = document.getElementById('hintButton');
-      button.innerText = button.textContent = 'Hint 2';
+      button.innerText = button.textContent = 'HINT: ALBUM';
       this.setState({ hints: 1 });
     }
     else {
-      this.setPlay(this.state.albumNum);
+      document.getElementById('albumHint').style.display = '';
+      document.getElementById('hintButton').style.display = 'none';
+      var button = document.getElementById('hintButton');
+      
     }
     return
   }
@@ -255,7 +268,8 @@ class Guesser extends Component {
     document.getElementById('passed').style.display = 'none';
     document.getElementById('failed').style.display = 'none';
     document.getElementById('next').style.display = 'none'
-    document.getElementById('artistHint').style.display = 'none';
+    document.getElementById('songtHint').style.display = 'none';
+    document.getElementById('albumHint').style.display = 'none';
     document.getElementById('hintButton').style.display = 'none';
     this.cropImg();
     var button = document.getElementById('hintButton');
@@ -635,16 +649,17 @@ class Guesser extends Component {
               </Typography>
             </Box>
           </Modal> */}
-          <h2>DO YOU KNOW WHAT WHO WROTE SPLICE {this.state.albumNum + 1}?</h2>
+          <h2>DO YOU KNOW THE ARTIST OF SPLICE {this.state.albumNum + 1}?</h2>
           <Button id='playBtn' onClick={() => { this.playPause();}}>
             <img src = {mute} id = "mute"/>
           </Button>
-          <h2 id='artistHint'>HINT: THE ARTIST {this.getArtists()}</h2>
+          <h2 id='songHint'>SONG: {this.getSongName()}</h2>
+          <h2 id='albumHint'>ALBUM: {this.getAlbumName()}</h2>
           <canvas className="canvas" ref='canvas' id="canvas" width={300} height={300}></canvas>
           <div className='textbox' id='guesser' >
             {/* <input autoComplete="off" type="text" id="input" onChange={this.saveInput} /> */}
             <Button id='hintButton' onClick={() => { this.getHint() }}>
-              HINT 1
+              HINT: SONG
             </Button>
 
             <Autocomplete
@@ -709,27 +724,22 @@ class Guesser extends Component {
             SPLICIFY
             </Typography>
             {/* <br></br> */}
-            <Typography id="modal-modal-description1" sx={{ mt: 2 }}>
-            Splicify is a project for the Creative Computing Studio course at Virginia Tech. 
 
-            
+            <Typography id="modal-modal-description1" sx={{ mt: 2 }}>
+            Splicify is an intereactive expereince where you can guess the artists of your top 5 songs. Log in to 
+            your Spotify account and we will create an image that contains slices of album covers. You will have 3 
+            guesses to correctly answer the artist name. Splicify is a project for the Creative Computing Studio 
+            course at Virginia Tech.
+
             </Typography>
+
             <Typography id="modal-modal-description2" sx={{ mt: 2}}>
             Created by: 
             
             </Typography>
 
             <Typography id="modal-modal-description3" sx={{ mt: 2}}>
-              Tyler Esposo 
-            </Typography>
-            <Typography id="modal-modal-description4" sx={{ mt: 2}}>
-              Catherine Lee
-            </Typography>
-            <Typography id="modal-modal-description5" sx={{ mt: 2}}>
-              Josh Protacio 
-            </Typography>
-            <Typography id="modal-modal-description6" sx={{ mt: 2}}>
-              Lily Thai
+              Tyler Esposo, Catherine Lee, Josh Protacio, Lily Thai
             </Typography>
             
 
