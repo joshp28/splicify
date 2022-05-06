@@ -90,6 +90,7 @@ class Guesser extends Component {
     document.getElementById('artistHint').style.display = 'none';
     document.getElementById('hintButton').style.display = 'none';
     document.getElementById('getResults').style.display = 'none';
+    document.getElementById('guesses').style.display = 'none';
     return;
   }  
 
@@ -140,6 +141,7 @@ class Guesser extends Component {
       document.getElementById('passed').style.display = '';
       document.getElementById('guesser').style.display = 'none';
       document.getElementById('next').style.display = '';
+      document.getElementById('guesses').style.display = 'none';
       // console.log(spotify[albumNum].song_title);getArtists
     }
     else if (autoInput != null && autoInput.toLowerCase() === mydata.songs[albumNum].song_artist.toLowerCase()) {
@@ -150,6 +152,7 @@ class Guesser extends Component {
       document.getElementById('passed').style.display = '';
       document.getElementById('guesser').style.display = 'none';
       document.getElementById('next').style.display = '';
+      document.getElementById('guesses').style.display = 'none';
     }
     // guess it wrong
     else if (tries == 2) {
@@ -159,11 +162,13 @@ class Guesser extends Component {
       document.getElementById('guesser').style.display = 'none';
       document.getElementById('next').style.display = '';
       document.getElementById('artistHint').style.display = 'none';
+      document.getElementById('guesses').style.display = 'none';
     }
     // guess wrong but have more submissions
     else {
       this.setState({ input: null, tries: tries + 1 });
       document.getElementById('hintButton').style.display = '';
+      document.getElementById('guesses').style.display = '';
       // console.log(mydata.songs[albumNum].song_artist.toLowerCase());
 
     }
@@ -687,6 +692,7 @@ class Guesser extends Component {
         <hr className="horizontalline2" />
         <div className='feedback'>
           <div id='failed' >SORRY YOU DIDN'T GET IT</div>
+          <div id='guesses' >NICE TRY, GUESSES LEFT: {3 - this.state.tries}</div>
           <div id='passed' >CONGRATS! YOU GOT IT</div>
           <Modal 
           show={this.state.show} 
