@@ -153,12 +153,7 @@ class Results extends Component {
             <img src = {copy} id = "copy"/>
           </Button>
 
-          <Button style={{
-            backgroundColor: "black",
-            }}
-            variant="contained" id='replay' onClick={() => { this.replay() }}>
-            HOME
-          </Button>
+            
 
           
         </div>

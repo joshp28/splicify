@@ -128,7 +128,7 @@ class Guesser extends Component {
   addNewItem = () => {
     let { answers, input, loaded, audio, isPlaying, albumNum, tries, correct } = this.state;
     // console.log("ADDNEWITEM");
-    this.cropImg();
+    //this.cropImg();
 
     // guess three times and activate hints on each wrong submission
     // guess it right
@@ -154,6 +154,9 @@ class Guesser extends Component {
       document.getElementById('guesser').style.display = 'none';
       document.getElementById('next').style.display = '';
       document.getElementById('guesses').style.display = 'none';
+      var button = document.getElementById('hintButton');
+      button.innerText = button.textContent = 'HINT: SONG';
+      document.getElementById('hintButton').style.display = 'none';
     }
     // guess it wrong
     else if (tries == 2) {
@@ -165,6 +168,9 @@ class Guesser extends Component {
       document.getElementById('songHint').style.display = 'none';
       document.getElementById('albumHint').style.display = 'none';
       document.getElementById('guesses').style.display = 'none';
+      var button = document.getElementById('hintButton');
+      button.innerText = button.textContent = 'HINT: SONG';
+      document.getElementById('hintButton').style.display = 'none';
     }
     // guess wrong but have more submissions
     else {
@@ -181,6 +187,7 @@ class Guesser extends Component {
       document.getElementById('next').style.display = 'none';
       document.getElementById('getResults').style.display = '';
       document.getElementById('guesses').style.display = 'none';
+      document.getElementById('hintButton').style.display = 'none';
     }
 
     return;
@@ -243,10 +250,10 @@ class Guesser extends Component {
       this.setState({ hints: 1 });
     }
     else {
-      document.getElementById('albumHint').style.display = '';
-      document.getElementById('hintButton').style.display = 'none';
       var button = document.getElementById('hintButton');
       button.innerText = button.textContent = 'HINT: SONG';
+      document.getElementById('albumHint').style.display = '';
+      document.getElementById('hintButton').style.display = 'none';
       
     }
     return
@@ -260,7 +267,6 @@ class Guesser extends Component {
     this.state.audio.pause();
     this.state.audio = new Audio(mydata.songs[this.state.albumNum].preview_url);
     document.getElementById("mute").src = mute;
-
     // this.playPause();
     
     this.setState({ hints: 0, input: null, albumNum: this.state.albumNum, tries: 0 });
@@ -269,13 +275,14 @@ class Guesser extends Component {
     document.getElementById('passed').style.display = 'none';
     document.getElementById('failed').style.display = 'none';
     document.getElementById('next').style.display = 'none'
-    document.getElementById('songtHint').style.display = 'none';
+    document.getElementById('songHint').style.display = 'none';
     document.getElementById('albumHint').style.display = 'none';
     document.getElementById('hintButton').style.display = 'none';
-    this.cropImg();
     var button = document.getElementById('hintButton');
-      button.innerText = button.textContent = 'Hint 1';
-
+    button.innerText = button.textContent = 'Hint 1';
+    this.cropImg();
+    
+    
     return;
   }
   
@@ -712,9 +719,9 @@ class Guesser extends Component {
         {this.state.results && <Results id='results' data={this.state}></Results>}
         <hr className="horizontalline2" />
         <div className='feedback'>
-          <div id='failed' >SORRY YOU DIDN'T GET IT</div>
+          <div id='failed' >SORRY, YOU DIDN'T GET IT</div>
           <div id='guesses' >NICE TRY, GUESSES LEFT: {3 - this.state.tries}</div>
-          <div id='passed' >CONGRATS! YOU GOT IT</div>
+          <div id='passed' >CONGRATS, YOU GOT IT</div>
           <Modal 
           show={this.state.show} 
           handleClose={this.hideModal} 
@@ -732,10 +739,12 @@ class Guesser extends Component {
             {/* <br></br> */}
 
             <Typography id="modal-modal-description1" sx={{ mt: 2 }}>
-            Splicify is an intereactive expereince where you can guess the artists of your top 5 songs. Log in to 
-            your Spotify account and we will create an image that contains slices of album covers. You will have 3 
-            guesses to correctly answer the artist name. Splicify is a project for the Creative Computing Studio 
-            course at Virginia Tech.
+            Splicify is an interactive experience where you can guess the artists of your 
+            top 5 songs. Log in to your Spotify account and we will create an image that 
+            contains slices of album covers. You have 3 guesses to correctly answer the 
+            artist name. There are three hints available, the song, song name, and album 
+            name. Splicify is a project for the Creative Computing Studio course at Virginia Tech.
+
 
             </Typography>
 
