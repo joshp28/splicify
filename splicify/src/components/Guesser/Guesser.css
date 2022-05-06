@@ -199,4 +199,5 @@ hr {
 #rightblock {
     float: right;
     width: 42vw;
+    align-items: center;
 }

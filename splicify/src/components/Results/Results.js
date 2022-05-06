@@ -4,7 +4,7 @@ import './Results.css';
 import Button from '@mui/material/Button';
 
 import dwlbtn from '../../images/download.svg';
-
+import copy from '../../images/copy.svg';
 var data;
 var mydata;
 var answers
@@ -149,18 +149,15 @@ class Results extends Component {
             <img src = {dwlbtn} id = "dwlbtn"/>
           </Button>
 
-          <Button style={{
-            backgroundColor: "black",
-            }}
-            variant="contained" id='shareBtn' onClick={() => { this.shareImage() }}>
-            Share
+          <Button id='shareBtn' onClick={() => { this.shareImage() }}>
+            <img src = {copy} id = "copy"/>
           </Button>
 
           <Button style={{
             backgroundColor: "black",
             }}
             variant="contained" id='replay' onClick={() => { this.replay() }}>
-            Replay
+            HOME
           </Button>
 
           
