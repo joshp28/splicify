@@ -617,7 +617,7 @@ class Guesser extends Component {
       
       <div className="Home" >
         
-        <div className='vl' />
+        <div id='vl' />
         <h1 className='scoreheader'>SCORE: {this.state.correct}/5</h1>
         {/* <h1 id="spliceHome" component={Link} to="/">{"SPLICIFY"}</h1> */}
         <h1 id="spliceHome" component={Link} to="/">
@@ -626,12 +626,67 @@ class Guesser extends Component {
         <Button id='infoBtn' onClick={() => { this.showModal() }}>
           <img src = {infoBtn} id = "info"/>
         </Button>
-        
-        
-        
-        
         <hr className="block" />
+
+
         <div id='guesserblock'>
+          <div id='leftblock'>
+            <Button id='playBtn' onClick={() => { this.playPause();}}>
+              <img src = {mute} id = "mute"/>
+            </Button>
+            <canvas className="canvas" ref='canvas' id="canvas" width={300} height={300}></canvas>
+
+          </div>
+
+          <div id='rightblock'>
+            <h2>DO YOU KNOW THE ARTIST OF SPLICE {this.state.albumNum + 1}?</h2>
+            <h2 id='songHint'>SONG: {this.getSongName()}</h2>
+            <h2 id='albumHint'>ALBUM: {this.getAlbumName()}</h2>
+            <div className='textbox' id='guesser' >
+              {/* <input autoComplete="off" type="text" id="input" onChange={this.saveInput} /> */}
+              <Button id='hintButton' onClick={() => { this.getHint() }}>
+                HINT: SONG
+              </Button>
+
+              <Autocomplete
+                id="highlights-demo"
+                freeSolo
+                autoSelect
+                sx={{ width: 600, margin: 'auto'}}
+                // options={top100Songs.map((option) => this.parseGetArtists(option.song_artist))}
+                options={top100Songs.map((option) => option.song_artist)}
+                onChange={(event, v) => autoInput = v}
+                renderInput={(params) => (
+                  <div id="container">
+                    <Box
+                      sx={{
+                        width: '60%',
+                        margin: 'auto'
+                      }}
+                    >
+
+                      <TextField id="input"  {...params} sx={{ position: "center", background: "white", input: { color: 'black' } }} label="Guess your artist!" margin="normal" onChange={this.saveInput} />
+                    </Box>
+                  </div>
+
+                )}
+              />
+              <Button variant="contained" type="submit" onClick={() => { this.addNewItem(); }}>
+                Submit
+              </Button>
+              <br />
+              <br />
+            </div>
+            <br />
+            <Button variant="contained" id='next' onClick={() => { this.nextAlbum() }}>
+              Next
+            </Button>
+
+            <Button variant="contained" id='getResults' onClick={() => { this.getResults() }}>
+              Results
+            </Button>
+
+          </div>
           
           
           {/* <Modal
@@ -649,57 +704,7 @@ class Guesser extends Component {
               </Typography>
             </Box>
           </Modal> */}
-          <h2>DO YOU KNOW THE ARTIST OF SPLICE {this.state.albumNum + 1}?</h2>
-          <Button id='playBtn' onClick={() => { this.playPause();}}>
-            <img src = {mute} id = "mute"/>
-          </Button>
-          <h2 id='songHint'>SONG: {this.getSongName()}</h2>
-          <h2 id='albumHint'>ALBUM: {this.getAlbumName()}</h2>
-          <canvas className="canvas" ref='canvas' id="canvas" width={300} height={300}></canvas>
-          <div className='textbox' id='guesser' >
-            {/* <input autoComplete="off" type="text" id="input" onChange={this.saveInput} /> */}
-            <Button id='hintButton' onClick={() => { this.getHint() }}>
-              HINT: SONG
-            </Button>
-
-            <Autocomplete
-              id="highlights-demo"
-              freeSolo
-              autoSelect
-              sx={{ width: 600, margin: 'auto'}}
-              // options={top100Songs.map((option) => this.parseGetArtists(option.song_artist))}
-              options={top100Songs.map((option) => option.song_artist)}
-              onChange={(event, v) => autoInput = v}
-              renderInput={(params) => (
-                <div id="container">
-                  <Box
-                    sx={{
-                      width: '60%',
-                      margin: 'auto'
-                    }}
-                  >
-
-                    <TextField id="input"  {...params} sx={{ position: "center", background: "white", input: { color: 'black' } }} label="Guess your artist!" margin="normal" onChange={this.saveInput} />
-                  </Box>
-                </div>
-
-              )}
-            />
-            <Button variant="contained" type="submit" onClick={() => { this.addNewItem(); }}>
-              Submit
-            </Button>
-            <br />
-            <br />
-          </div>
-          <br />
-          <Button variant="contained" id='next' onClick={() => { this.nextAlbum() }}>
-            Next
-          </Button>
-
-          <Button variant="contained" id='getResults' onClick={() => { this.getResults() }}>
-            Results
-          </Button>
-
+          
           
           {/* <button onClick={() => { this.nextAlbum() }} id='next'> Next </button> */}
         </div>

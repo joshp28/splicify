@@ -7,6 +7,7 @@
     left:0;
     right:0;
     overflow:hidden;
+    height: 100vh;
 
 }
 
@@ -60,21 +61,15 @@ h2 {
 }
 
 canvas {
-    /* position: relative;
-    justify-content: center;
-    align-items: center; */
     display: block;
-    margin-left: auto;
     margin-right: auto;
+    height: 50vh;
 }
 
 .block {
-    /* height: 5px; */
-    /* width: 391px; */
-    display: grid;
-    /* grid-template-columns: 1fr 20px 1fr;
-    grid-template-rows: 1fr;
-    background-color: rgb(255, 255, 255); */
+    width: 92vw;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 hr {
@@ -82,11 +77,11 @@ hr {
     border: 1px solid rgb(0, 0, 0);
 }
 
-.vl {
+#vl{
+    height: 90vh;
     border-right: 2px solid black;
-    height: 100vh;
     position: absolute;
-    right: 10vw;
+    margin-top: 5vh;
 }
 
 .horizontalline2 {
@@ -185,10 +180,23 @@ hr {
     /* background-color: beige; */
 }
 
-/* #playBtn {
+#playBtn {
+    margin-left: 0vw;
+}
+
+#guesserblock {
+    margin-left: 5vw;
+    height: 60vh;
+    width: 84vw;
+}
+
+#leftblock {
+    position: relative;
     float: left;
-    padding-left: 5em;
-} */
+    width: 42vw;
+}
 
-
-
+#rightblock {
+    float: right;
+    width: 42vw;
+}
