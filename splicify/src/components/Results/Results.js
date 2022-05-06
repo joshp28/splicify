@@ -127,15 +127,15 @@ class Results extends Component {
         <canvas className="canvasResults" ref='canvasResults' id="canvasResults" width={500} height={500}></canvas>
         <div id="answers">
           <h2 hhref={mydata.songs[0].track_url}>{mydata.songs[0].song_title}: {answers[0]}</h2>
-          <a id='a-link' href={mydata.songs[0].track_url}>Listen to Song #1</a>
+          <a id='a-link' href={mydata.songs[0].track_url} target="_blank">Listen to Song #1</a>
           <h2>{mydata.songs[1].song_title}: {answers[1]}</h2>
-          <a id='a-link' href={mydata.songs[1].track_url}>Listen to Song #2</a>
+          <a id='a-link' href={mydata.songs[1].track_url} target="_blank">Listen to Song #2</a>
           <h2>{mydata.songs[2].song_title}: {answers[2]}</h2>
-          <a id='a-link' href={mydata.songs[2].track_url}>Listen to Song #3</a>
+          <a id='a-link' href={mydata.songs[2].track_url} target="_blank">Listen to Song #3</a>
           <h2>{mydata.songs[3].song_title}: {answers[3]}</h2>
-          <a id='a-link' href={mydata.songs[3].track_url}>Listen to Song #4</a>
+          <a id='a-link' href={mydata.songs[3].track_url} target="_blank">Listen to Song #4</a>
           <h2>{mydata.songs[4].song_title}: {answers[4]}</h2>
-          <a id='a-link' href={mydata.songs[0].track_url}>Listen to Song #5</a>
+          <a id='a-link' href={mydata.songs[0].track_url} target="_blank">Listen to Song #5</a>
         </div>
         <div className='feedback'>
           {/* <Button style={{
