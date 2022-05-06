@@ -634,7 +634,7 @@ class Guesser extends Component {
           <Button id='playBtn' onClick={() => { this.playPause();}}>
             <img src = {mute} id = "mute"/>
           </Button>
-          <h2 id='artistHint'>HINT: THE ARTIST{this.getArtists()}</h2>
+          <h2 id='artistHint'>HINT: THE ARTIST {this.getArtists()}</h2>
           <canvas className="canvas" ref='canvas' id="canvas" width={300} height={300}></canvas>
           <div className='textbox' id='guesser' >
             {/* <input autoComplete="off" type="text" id="input" onChange={this.saveInput} /> */}

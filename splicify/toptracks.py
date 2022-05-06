@@ -50,7 +50,7 @@ ACCESS_TOKEN = util.prompt_for_user_token('',
                            client_secret='df5be2fc572f43fd8943f4f9a00b6fd8',
                            redirect_uri='http://localhost:8888/callback')
 
-def get_current_track(access_token):
+def get_top_tracks(access_token):
     response = requests.get(
         SPOTIFY_GET_CURRENT_TRACK_URL,
         headers={
@@ -145,7 +145,7 @@ def main():
     current_track_id = None
     # while True:
     if x==0:
-        current_track_info = get_current_track(ACCESS_TOKEN)
+        current_track_info = get_top_tracks(ACCESS_TOKEN)
     x = x + 1
     final_dict = {
         'songs': current_track_info
