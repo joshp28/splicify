@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import './Results.css';
 import Button from '@mui/material/Button';
 
@@ -7,14 +6,9 @@ import dwlbtn from '../../images/download.svg';
 import copy from '../../images/copy.svg';
 var data;
 var mydata;
-var answers
-
-
-
+var answers;
 
 class Results extends Component {
-
-  
   constructor(props) {
     super(props);
 
@@ -40,11 +34,6 @@ class Results extends Component {
       ctx.filter = cssfilter;
       ctx.drawImage(image1, (image1.width / 2) - 50, 0, 100, 500, 0, 0, 100, 500);
     }
-    // image1.onclick = function() {
-    //   console.log(mydata.songs[0].track_url);
-    //   window.location.href=mydata.songs[0].track_url;
-    //   // window.open(mydata.songs[0].track_url);
-    // }
 
     var image2 = new Image();
     image2.crossOrigin = "anonymous";
@@ -92,7 +81,6 @@ class Results extends Component {
           
         })
       ]).then(() => {
-        // navigator.clipboard.writeText("HELLO WORLD");
         console.log('Copied');
         alert("Image copied to clipboard!");
       })
@@ -138,12 +126,6 @@ class Results extends Component {
           <a id='a-link' href={mydata.songs[0].track_url} target="_blank">Listen to Song #5</a>
         </div>
         <div className='feedback'>
-          {/* <Button style={{
-            backgroundColor: "black",
-            }}
-            variant="contained" >
-            Download
-          </Button> */}
 
           <Button id='downloadBtn' onClick={() => { this.downloadImage() }}>
             <img src = {dwlbtn} id = "dwlbtn"/>
@@ -152,9 +134,6 @@ class Results extends Component {
           <Button id='shareBtn' onClick={() => { this.shareImage() }}>
             <img src = {copy} id = "copy"/>
           </Button>
-
-            
-
           
         </div>
         

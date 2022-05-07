@@ -4,7 +4,6 @@ import cover from '../../images/boypablo-feelinglonely.jpg';
 
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import { Controller, useForm } from "react-hook-form";
 
 import Results from '../Results/Results.js';
 
@@ -15,7 +14,6 @@ import close from '../../images/closeModalBtn.svg';
 import audioBtn from '../../images/Audio.svg';
 import infoBtn from '../../images/infoBtn.svg';
 import { Link } from 'react-router-dom';
-import { stepIconClasses } from "@mui/material";
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -210,13 +208,6 @@ class Guesser extends Component {
 
     }
     return artists.toUpperCase();
-  }
-
-  parseGetArtists = (songTitle) => {
-    let artsitArray = mydata.songs[this.state.albumNum].song_artist;
-    let artistLength = mydata.songs[this.state.albumNum].song_artist.length;
-    console.log("PARSING ARTSIT");
-    return artsitArray.toUpperCase();
   }
 
   getSongName = () => {
@@ -602,7 +593,6 @@ class Guesser extends Component {
         
         <div id='vl' />
         <h1 className='scoreheader'>SCORE: {this.state.correct}/5</h1>
-        {/* <h1 id="spliceHome" component={Link} to="/">{"SPLICIFY"}</h1> */}
         <h1 id="spliceHome" component={Link} to="/">
           <Link to="/" id="spliceHomeLink">SPLICIFY</Link>
         </h1>
@@ -626,7 +616,6 @@ class Guesser extends Component {
             <h2 id='songHint'>SONG: {this.getSongName()}</h2>
             <h2 id='albumHint'>ALBUM: {this.getAlbumName()}</h2>
             <div className='textbox' id='guesser' >
-              {/* <input autoComplete="off" type="text" id="input" onChange={this.saveInput} /> */}
               <Button id='hintButton' onClick={() => { this.getHint() }}>
                 HINT: SONG
               </Button>
@@ -636,7 +625,6 @@ class Guesser extends Component {
                 freeSolo
                 autoSelect
                 sx={{ width: 600, margin: 'auto'}}
-                // options={top100Songs.map((option) => this.parseGetArtists(option.song_artist))}
                 options={top100Songs.map((option) => option.song_artist)}
                 onChange={(event, v) => autoInput = v}
                 renderInput={(params) => (

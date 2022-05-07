@@ -10,7 +10,6 @@
 
 }
 
-
 h1 {
     font-weight: bold;
     color: black;
@@ -24,7 +23,6 @@ h1 {
 }
 
 h2 {
-    /* bottom: 5px; */
     font-weight: bold;
     color: black;
     font-size: 20px;
@@ -34,7 +32,6 @@ h2 {
 }
 
 .a-link {
-    /* bottom: 5px; */
     font-weight: bold;
     color: black;
     font-size: 20px;
@@ -51,25 +48,16 @@ h2 {
 }
 
 .canvasResults {
-    /* position: relative;
-    justify-content: center;
-    align-items: center; */
     display: block;
     margin-left: 15vw;
     margin-right: auto;
     float: left;
-    /* margin-top: 5vh; */
     margin-bottom: 5vh;
     
 }
 
 .block {
-    /* height: 5px; */
-    /* width: 391px; */
     display: grid;
-    /* grid-template-columns: 1fr 20px 1fr;
-    grid-template-rows: 1fr;
-    background-color: rgb(255, 255, 255); */
 }
 
 hr {
@@ -85,7 +73,6 @@ hr {
 }
 
 .horizontalline2 {
-    /* margin-top: 8vh; */
     width: 97vw;
     margin-left: auto;
     margin-right: auto;
@@ -106,7 +93,6 @@ hr {
 
 #shareBtn {
     margin-left: 280px;
-    /* margin-right: "auto"; */
     display: 'flex';
     justify-content: 'flex-end';
     height: 80px;
@@ -114,8 +100,6 @@ hr {
 
 #downloadBtn {
     margin-left: 230px;
-    /* height: 80px; */
-    /* width: 90px; */
 }
 
 #replay {
