@@ -31,14 +31,18 @@ External Code:
 	Libraries/APIs Used:
 		
 		- Spotipy
+        - Spotify API
 		- json (for Python)
 		- Material UI (https://mui.com/)
+		- Canvas
+		- Clipboard
 
 	Other Sources/Links:
 
 		- https://spotipy.readthedocs.io/en/2.19.0/#authorization-code-flow
 		- https://stackoverflow.com/questions/70527547/only-sometimes-receiving-keyerror-error-when-accessing-songs-via-spotify-api-i
 		- https://mui.com/components/modal/
+		- https://www.digitalocean.com/community/tutorials/react-modal-component
 		- https://mui.com/material-ui/react-autocomplete/
 		- https://mui.com/material-ui/react-text-field/
 		- https://stackoverflow.com/questions/27368778/how-to-toggle-audio-play-pause-with-one-button-or-link
@@ -46,7 +50,17 @@ External Code:
 		- https://www.w3schools.com/jsref/met_audio_play.asp
 		- https://mui.com/material-ui/react-button/
 		- https://mui.com/material-ui/react-box/
+		- https://mui.com/material-ui/react-typography/
+		- https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+		- https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
+		- https://dev.to/viclafouch/the-new-way-to-copy-an-image-or-a-text-to-clipboard-in-javascript-2n1g#:~:text=To%20copy%20an%20image%20to,to%20the%20write()%20method.
+		- https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
+		- https://developer.mozilla.org/en-US/docs/Web/API/Clipboard
 		- https://stackoverflow.com/questions/58595892/is-there-a-way-to-use-nodejs-child-process-spawn-to-run-a-python-application-tha
+
+# Figma Prototype Design
+
+https://www.figma.com/file/zcnkPPZijiHatHMa2Za2Nb/Splicify?node-id=0%3A1
 
 # Getting Started with Create React App
 
