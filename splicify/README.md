@@ -41,10 +41,13 @@ External Code:
 		- https://mui.com/material-ui/react-autocomplete/
 		- https://mui.com/material-ui/react-text-field/
 		- https://stackoverflow.com/questions/27368778/how-to-toggle-audio-play-pause-with-one-button-or-link
+		- https://stackoverflow.com/questions/53364140/how-can-i-grayscale-a-canvas-image-in-javascript
 		- https://www.w3schools.com/jsref/met_audio_play.asp
 		- https://mui.com/material-ui/react-button/
 		- https://mui.com/material-ui/react-box/
 		- https://stackoverflow.com/questions/58595892/is-there-a-way-to-use-nodejs-child-process-spawn-to-run-a-python-application-tha
+
+# Getting Started with Create React App
 
 # Getting Started with Create React App
 

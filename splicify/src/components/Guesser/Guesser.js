@@ -1,4 +1,3 @@
-// import React, { Component } from 'react';
 import React, { Component, useState } from "react";
 import './Guesser.css';
 import cover from '../../images/boypablo-feelinglonely.jpg';
@@ -97,7 +96,6 @@ class Guesser extends Component {
   playPause = () => {
     // Get state of song    
     let play = this.state.isPlaying;
-    // console.log(play);
     const btn = document.getElementById("playBtn");
 
     this.state.audio.addEventListener('ended', function() {
@@ -126,28 +124,19 @@ class Guesser extends Component {
 
   addNewItem = () => {
     let { answers, input, loaded, audio, isPlaying, albumNum, tries, correct } = this.state;
-    // console.log("ADDNEWITEM");
-    //this.cropImg();
 
     // guess three times and activate hints on each wrong submission
     // guess it right
-    if (input != null && input.toLowerCase() === mydata.songs[albumNum].song_artist.toLowerCase()) {
-    // if (input != null && input.toLowerCase() === this.getArtists().toLowerCase()) {
-      
+    if (input != null && input.toLowerCase() === mydata.songs[albumNum].song_artist.toLowerCase()) {      
       answers.push("Correct");
-      // console.log(mydata.songs[albumNum].song_artist.toLowerCase());
-      // console.log(input);
       this.setState({ correct: correct + 1 });
       document.getElementById('passed').style.display = '';
       document.getElementById('guesser').style.display = 'none';
       document.getElementById('next').style.display = '';
       document.getElementById('guesses').style.display = 'none';
-      // console.log(spotify[albumNum].song_title);getArtists
     }
     else if (autoInput != null && autoInput.toLowerCase() === mydata.songs[albumNum].song_artist.toLowerCase()) {
       answers.push("Correct");
-      // console.log(mydata.songs[albumNum].song_artist.toLowerCase());
-      // console.log(answers);
       this.setState({ correct: correct + 1 });
       document.getElementById('passed').style.display = '';
       document.getElementById('guesser').style.display = 'none';
@@ -160,7 +149,6 @@ class Guesser extends Component {
     // guess it wrong
     else if (tries == 2) {
       answers.push("Incorrect");
-      // console.log(mydata.songs[albumNum].song_artist.toLowerCase());
       document.getElementById('failed').style.display = '';
       document.getElementById('guesser').style.display = 'none';
       document.getElementById('next').style.display = '';
@@ -176,7 +164,6 @@ class Guesser extends Component {
       this.setState({ input: null, tries: tries + 1 });
       document.getElementById('hintButton').style.display = '';
       document.getElementById('guesses').style.display = '';
-      // console.log(mydata.songs[albumNum].song_artist.toLowerCase());
 
     }
 
@@ -267,7 +254,6 @@ class Guesser extends Component {
     this.state.audio.pause();
     this.state.audio = new Audio(mydata.songs[this.state.albumNum].preview_url);
     document.getElementById("mute").src = mute;
-    // this.playPause();
     
     this.setState({ hints: 0, input: null, albumNum: this.state.albumNum, tries: 0 });
     
