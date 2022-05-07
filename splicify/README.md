@@ -30,6 +30,7 @@ External Code:
 	Libraries/APIs Used:
 		
 		- Spotipy
+        - Spotify API
 		- json (for Python)
 		- Material UI (https://mui.com/)
 		- Canvas

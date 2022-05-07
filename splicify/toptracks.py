@@ -1,32 +1,3 @@
-# SET SPOTIPY_CLIENT_ID='1065d1fc90714ae18996972cb4abd133'
-# SET SPOTIPY_CLIENT_SECRET='df5be2fc572f43fd8943f4f9a00b6fd8'
-# SET SPOTIPY_REDIRECT_URI='http://localhost:8888/callback'
-
-# import spotipy
-# import os
-# from spotipy.oauth2 import SpotifyOAuth
-
-
-
-# scope = "user-library-read"
-# cid = '1065d1fc90714ae18996972cb4abd133'
-# secret = 'df5be2fc572f43fd8943f4f9a00b6fd8'
-
-# os.environ['SPOTIPY_CLIENT_ID']= cid
-# os.environ['SPOTIPY_CLIENT_SECRET']= secret
-# os.environ['SPOTIPY_REDIRECT_URI']='http://localhost:8888/callback'
-# sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
-
-# results = sp.current_user_saved_tracks()
-# for idx, item in enumerate(results['items']):
-#     track = item['track']
-#     print(idx, track['artists'][0]['name'], " – ", track['name'])
-
-
-
-# -----------------------------------------------------------------------------------------------
-
-
 import requests
 import time
 import spotipy
@@ -37,13 +8,8 @@ import json
 from pprint import pprint
 
 
-# x = 0
-# SPOTIFY_GET_CURRENT_TRACK_URL = 'https://api.spotify.com/v1/me/player/currently-playing'
-# SPOTIFY_GET_CURRENT_TRACK_URL = 'https://api.spotify.com/v1/me/'
-# SPOTIFY_GET_CURRENT_TRACK_URL = '	https://api.spotify.com/v1/me/player/recently-played'
 SPOTIFY_LOGOUT_URL = 'https://www.spotify.com/fr/logout'
 SPOTIFY_GET_CURRENT_TRACK_URL = 'https://api.spotify.com/v1/me/top/tracks'
-# ACCESS_TOKEN = 'BQB0LLWcGqQ5kl3xiyDJzphpd_vCmAJlIeYaGGLDks9x4D3A9-90AqC1G3hAw7scLjcnuY8IHGb1KSyq2exyuJgI5p3-J24J9Pxk3mwX0ofMZeeF5mRp0rRB71Bh6Fg3Al3MgQKjjVXxFur2JUtPicY'
 ACCESS_TOKEN = util.prompt_for_user_token('',
                            'user-top-read',
                            client_id='1065d1fc90714ae18996972cb4abd133',
@@ -74,16 +40,10 @@ def get_top_tracks(access_token):
         artist_names = ''
         
         for idx, x in enumerate(i['artists']):
-            # artist_names += '"'
             artist_names += x['name']
-            # artist_names += '" '
-            # print("\n       iNDEXXXXX:" + str(len(i['artists'])) + " end\n" + "\n\nHEREEEEEEOOOOO\n\n")
             if (idx < len(i['artists']) - 1):
                 artist_names += ' and '
-        # print(artist_names)
         artist_names.replace(', ', '')
-        # artist_names += ']'
-        # response += '{\nsong title: ' + i['name'] + '\nsong artist: ' + i['artists'][0]['name'] + '\nimage url: ' + i['album']['images'][0]['url'] + '\n}\n'
         response += "{ song_title: " + i['name'] + " song_artist: " + artist_names + " image_url: " + i['album']['images'][0]['url'] + " "
         if i['preview_url'] != None:
             response += 'preview_url: ' + i['preview_url']
@@ -100,9 +60,6 @@ def get_top_tracks(access_token):
         }
         
         songs.append(current_song)
-        # with open("spotify_info.txt", "a") as out_file:
-        #     out_file.write(json.dumps(current_song))
-            # pprint(current_song, out_file)
         print(response.encode("UTF-8"))
         print("\n")
 
@@ -114,25 +71,6 @@ def get_top_tracks(access_token):
     with open('./src/spotify_info.json', 'w') as out:
         json.dump(json_string, out)
 
-    # track_id = json_resp['item']['id']
-    # track_name = json_resp['item']['name']
-    # artists = [artist for artist in json_resp['item']['artists']]
-
-    # link = json_resp['item']['external_urls']['spotify']
-
-    # -------------------------------------------------------------------
-
-    # artist_names = ', '.join([artist['name'] for artist in artists])
-
-    # current_track_info = {
-    #     "id": track_id,
-    #     "track_name": track_name,
-    #     "artists": artist_names,
-    #     "link": link
-    # }
-
-    # return current_track_info
-    # return response
     return songs
     # --------------------------------------------------------
 
@@ -150,27 +88,15 @@ def main():
     final_dict = {
         'songs': current_track_info
     }
-    # print(final_dict.encode("utf-8)"))
+    
     with open("spotify_info.txt", "a") as out_file:
             out_file.write(json.dumps(final_dict))
     with open("spotify_info.txt") as oop:
         json_data = json.load(oop)
-        # print(json_data)
-    # print(current_track_info)
-        
-        # if current_track_info['id'] != cu
-
-        # if current_track_info['id'] != current_track_id:
-        #     pprint(
-        #         current_track_info,
-        #         indent=4,
-        #     )
-        #     current_track_id = current_track_info['id']
-
-        # time.sleep(1)
+    
     if os.path.exists(".cache"):
         os.remove('.cache')
-    # print(count)
+    
 
     
 
