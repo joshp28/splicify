@@ -1,3 +1,51 @@
+Requirements:
+	- User must have Python installed on computer
+	- Have pip installed on computer
+	- User must have Node.js installed
+	- Have npm installed
+	- Have the following Python libraries:
+		- requests
+		- time
+		- spotipy
+		- util
+		- os
+		- json
+	- Have the following JS/Node.js libraries:
+		- express
+		- open
+		- fs
+
+Running the Application:
+
+	Run this command on first run:
+
+		npm install
+
+	Run this command to start app:
+	
+		npm run dev
+
+External Code:
+
+	Libraries/APIs Used:
+		
+		- Spotipy
+		- json (for Python)
+		- Material UI (https://mui.com/)
+
+	Other Sources/Links:
+
+		- https://spotipy.readthedocs.io/en/2.19.0/#authorization-code-flow
+		- https://stackoverflow.com/questions/70527547/only-sometimes-receiving-keyerror-error-when-accessing-songs-via-spotify-api-i
+		- https://mui.com/components/modal/
+		- https://mui.com/material-ui/react-autocomplete/
+		- https://mui.com/material-ui/react-text-field/
+		- https://stackoverflow.com/questions/27368778/how-to-toggle-audio-play-pause-with-one-button-or-link
+		- https://www.w3schools.com/jsref/met_audio_play.asp
+		- https://mui.com/material-ui/react-button/
+		- https://mui.com/material-ui/react-box/
+		- https://stackoverflow.com/questions/58595892/is-there-a-way-to-use-nodejs-child-process-spawn-to-run-a-python-application-tha
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

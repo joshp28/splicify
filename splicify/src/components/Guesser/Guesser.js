@@ -21,7 +21,6 @@ import { stepIconClasses } from "@mui/material";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-// import Modal from '@mui/material/Modal';
 
 import Modal from '../Modal/Modal.js';
 
@@ -588,18 +587,10 @@ class Guesser extends Component {
 
   
   handleHome = () => {
-    // browserHistory.push('/');
     document.getElementById("spliceHome").addEventListener('click', function(){
       console.log('h1 has been clicked');
     });
     
-  }
-
-  handleInfo() {
-    console.log("INFO!");
-    
-    
-     
   }
 
   constructor() {
@@ -619,9 +610,6 @@ class Guesser extends Component {
 
   render() {   
     
-    
-    
-
     return (
       
       <div className="Home" >
@@ -696,26 +684,6 @@ class Guesser extends Component {
             </Button>
 
           </div>
-          
-          
-          {/* <Modal
-            open={open}
-            onClose={this.handleClose()}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-            >
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-              Share this with friends!
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Lorem ipsum...
-              </Typography>
-            </Box>
-          </Modal> */}
-          
-          
-          {/* <button onClick={() => { this.nextAlbum() }} id='next'> Next </button> */}
         </div>
         {this.state.results && <Results id='results' data={this.state}></Results>}
         <hr className="horizontalline2" />
